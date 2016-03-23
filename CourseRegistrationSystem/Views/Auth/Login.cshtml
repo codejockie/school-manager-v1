@@ -1,5 +1,22 @@
-﻿@{ 
+﻿@model CourseRegistrationSystem.ViewModels.AuthLogin
+
+@{ 
     ViewBag.Title = "Login";
 }
 
-<p>This is the Login View!</p>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+
+    <div>
+        @Html.LabelFor(x => x.Username)
+        @Html.EditorFor(x => x.Username)
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Password)
+        @Html.EditorFor(x => x.Password)
+    </div>
+    <div>
+        <input type="submit" value="Login" />
+    </div>
+}
