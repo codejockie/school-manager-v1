@@ -11,7 +11,7 @@ namespace CourseRegistrationSystem.Controllers
     {
         public ActionResult Index()
         {
-            return Content("<h2>Home Page</h2>");
+            return View();
         }
     }
 }

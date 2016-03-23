@@ -10,7 +10,7 @@ namespace CourseRegistrationSystem.Controllers
     {
         public ActionResult Login()
         {
-            return Content("<h2>Login!</h2>");
+            return View();
         }
     }
 }

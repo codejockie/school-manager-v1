@@ -1,0 +1,28 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - CourseRegistrationSystem</title>
+</head>
+<body>
+    <header>
+        <h1>
+            <a href="@Url.RouteUrl("home")">Online Course Registration System</a>
+        </h1>
+        <a href="@Url.RouteUrl("login")">Login</a>
+    </header>
+    
+    @RenderBody()
+
+    <footer>
+        &copy; @DateTime.UtcNow.Year - Me
+    </footer>
+
+    @RenderSection("Scripts", false)
+</body>
+</html>

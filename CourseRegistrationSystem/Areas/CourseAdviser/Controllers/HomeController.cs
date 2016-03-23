@@ -11,7 +11,7 @@ namespace CourseRegistrationSystem.Areas.CourseAdviser.Controllers
         // GET: CourseAdviser/Home
         public ActionResult Index()
         {
-            return Content("<h2>Course Advisers Page!</h2>");
+            return View();
         }
     }
 }
