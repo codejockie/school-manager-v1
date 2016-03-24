@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace CourseRegistrationSystem.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class CoursesController : Controller
     {
         public ActionResult Index()
