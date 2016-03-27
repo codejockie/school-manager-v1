@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseRegistrationSystem.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,12 @@ using System.Web.Mvc;
 namespace CourseRegistrationSystem.Areas.Admin.Controllers
 {
     [Authorize(Roles = "admin")]
+    [SelectedTab("courses")]
     public class CoursesController : Controller
     {
         public ActionResult Index()
         {
-            return Content("<h2>Courses</h2>");
+            return View();
         }
     }
 }
