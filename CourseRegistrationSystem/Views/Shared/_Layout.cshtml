@@ -1,4 +1,6 @@
-﻿@{
+﻿@using System.Web.Optimization
+
+@{
     Layout = null;
 }
 
@@ -8,6 +10,8 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title - CourseRegistrationSystem</title>
+
+    @Styles.Render("~/styles")
 </head>
 <body>
     <header>
@@ -36,6 +40,7 @@
         &copy; @DateTime.UtcNow.Year - Me
     </footer>
 
+    @Scripts.Render("~/scripts")
     @RenderSection("Scripts", false)
 </body>
 </html>
