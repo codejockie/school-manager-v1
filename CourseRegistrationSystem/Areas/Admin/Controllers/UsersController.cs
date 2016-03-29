@@ -1,4 +1,7 @@
-﻿using CourseRegistrationSystem.Infrastructure;
+﻿using CourseRegistrationSystem.Areas.Admin.ViewModels;
+using CourseRegistrationSystem.Infrastructure;
+using CourseRegistrationSystem.Models;
+using NHibernate.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +17,10 @@ namespace CourseRegistrationSystem.Areas.Admin.Controllers
         // GET: Admin/Users
         public ActionResult Index()
         {
-            return View();
+            return View(new UsersIndex
+            {
+                Users = Database.Session.Query<User>().ToList()
+            });
         }
     }
 }
