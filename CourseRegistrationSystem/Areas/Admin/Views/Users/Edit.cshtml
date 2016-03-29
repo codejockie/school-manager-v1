@@ -1,0 +1,20 @@
+﻿@model CourseRegistrationSystem.Areas.Admin.ViewModels.UsersEdit
+
+<h1>Edit User @Model.Username</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.Username)
+        @Html.TextBoxFor(x => x.Username, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Email)
+        @Html.TextBoxFor(x => x.Email, new { @class = "form-control", type = "email" })
+    </div>
+
+    <input type="submit" value="Update User" class="btn btn-primary"/>
+    <a href="@Url.Action("index")"> or cancel</a>
+}

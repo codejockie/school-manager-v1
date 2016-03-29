@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseRegistrationSystem.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace CourseRegistrationSystem
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-
+            filters.Add(new TransactionFilter());
         }
     }
 }
