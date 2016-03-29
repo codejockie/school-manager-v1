@@ -10,6 +10,13 @@ namespace CourseRegistrationSystem.Models
 {
     public class User
     {
+        private const int _workFactor = 13;
+
+        public static void FakeHash()
+        {
+            BCrypt.Net.BCrypt.HashPassword("", _workFactor);
+        }
+
         public virtual int Id { get; set; }
         public virtual string Username { get; set; }
         public virtual string Email { get; set; }
@@ -17,7 +24,12 @@ namespace CourseRegistrationSystem.Models
 
         public virtual void SetPassword(string password)
         {
-            PasswordHash = "IGNORE ME";
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword(password, _workFactor);
+        }
+
+        public virtual bool CheckPassword(string password)
+        {
+            return BCrypt.Net.BCrypt.Verify(password, PasswordHash);
         }
     }
 
