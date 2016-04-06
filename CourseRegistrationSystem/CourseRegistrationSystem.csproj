@@ -143,6 +143,8 @@
     <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Users\ResetPassword.cshtml" />
     <Content Include="Areas\Admin\Views\Users\_RoleEditor.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\New.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\Edit.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -159,6 +161,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CoursesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Courses.cs" />
     <Compile Include="Areas\Admin\ViewModels\Users.cs" />
     <Compile Include="Areas\CourseAdviser\Controllers\HomeController.cs" />
     <Compile Include="Areas\CourseAdviser\CourseAdviserAreaRegistration.cs" />
@@ -173,7 +176,10 @@
     <Compile Include="Infrastructure\SelectedTabAttribute.cs" />
     <Compile Include="Infrastructure\TransactionFilter.cs" />
     <Compile Include="Migrations\_001_UsersAndRoles.cs" />
+    <Compile Include="Migrations\_002_Courses.cs" />
+    <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\Student.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Auth.cs" />

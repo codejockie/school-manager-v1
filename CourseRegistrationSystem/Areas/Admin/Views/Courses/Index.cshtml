@@ -1,1 +1,50 @@
-﻿<h1>Courses</h1>
+﻿@model CourseRegistrationSystem.Areas.Admin.ViewModels.CoursesIndex
+
+<h1>Courses</h1>
+
+<div class="btn-toolbar">
+    <a href="@Url.Action("new")" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-plus"></i> Add Course</a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Course Code</th>
+            <th>Course Title</th>
+            <th>Lecturer</th>
+            <th>Level</th>
+            <th>Semester</th>
+            <th>Credit</th>
+            <th>Type</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in Model.Courses)
+        {
+            <tr>
+                <td>@course.CourseId</td>
+                <td>@course.CourseCode</td>
+                <td>@course.CourseTitle</td>
+                <td>@course.LecturerName</td>
+                <td>@course.Level</td>
+                <td>@course.Semester</td>
+                <td>@course.Credit</td>
+                <td>@course.Type</td>
+                <td>
+                    <div class="btn-group">
+                        <a href="@Url.Action("edit", new { course.CourseId })" class="btn btn-xs btn-primary">
+                            <i class="glyphicon glyphicon-edit"></i>
+                            Edit
+                        </a>
+                        <a href="@Url.Action("delete", new { course.CourseId })" class="btn btn-xs btn-danger" data-post="Are you sure you want to delete @course.CourseId @course.CourseTitle?">
+                            <i class="glyphicon glyphicon-remove"></i>
+                            Delete
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

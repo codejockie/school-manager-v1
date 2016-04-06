@@ -27,6 +27,7 @@ namespace CourseRegistrationSystem
             var mapper = new ModelMapper();
             mapper.AddMapping<UserMap>();
             mapper.AddMapping<RoleMap>();
+            mapper.AddMapping<CourseMap>();
 
             config.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
 
