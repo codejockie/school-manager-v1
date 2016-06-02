@@ -1,4 +1,5 @@
-﻿using CourseRegistrationSystem.Models;
+﻿using CourseRegistrationSystem.Infrastructure;
+using CourseRegistrationSystem.Models;
 using CourseRegistrationSystem.ViewModels;
 using NHibernate.Linq;
 using System;
@@ -10,12 +11,13 @@ using System.Web.Security;
 
 namespace CourseRegistrationSystem.Controllers
 {
+    [SelectedTab("login")]
     public class AuthController : Controller
     {
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToRoute("home");
+            return RedirectToRoute("login");
         }
 
         public ActionResult Login()
@@ -41,7 +43,13 @@ namespace CourseRegistrationSystem.Controllers
             if (!string.IsNullOrWhiteSpace(returnUrl))
                 return Redirect(returnUrl);
 
-            return RedirectToRoute("home");
+            if (User.IsInRole("admin"))
+                return RedirectToAction("index", new { area = "admin", controller = "users" });
+            else
+                if (User.IsInRole("course adviser"))
+                    return RedirectToAction("index", new { area = "courseadviser", controller = "home" });
+                else
+                    return RedirectToAction("index", "welcome");
         }
     }
 }

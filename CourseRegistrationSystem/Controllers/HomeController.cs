@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseRegistrationSystem.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace CourseRegistrationSystem.Controllers
 {
+    [SelectedTab("home")]
     public class HomeController : Controller
     {
         public ActionResult Index()

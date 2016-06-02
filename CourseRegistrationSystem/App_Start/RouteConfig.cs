@@ -12,6 +12,8 @@ namespace CourseRegistrationSystem
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            routes.MapMvcAttributeRoutes();
+
             var namespaces = new[] { typeof(HomeController).Namespace };
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
@@ -20,6 +22,13 @@ namespace CourseRegistrationSystem
             routes.MapRoute("Logout", "logout", new { controller = "Auth", action = "Logout" }, namespaces);
 
             routes.MapRoute("Home", "", new { controller = "Home", action = "Index" }, namespaces);
+            //routes.MapRoute("Welcome_home", "welcome_home", new { controller = "Welcome", action = "Index" }, namespaces);
+
+            //routes.MapRoute(
+            //    "Welcome_home_default",
+            //    "{controller}/{action}/{id}",
+            //    new { action = "Index", id = UrlParameter.Optional }
+            //);
         }
     }
 }

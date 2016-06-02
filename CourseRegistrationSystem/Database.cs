@@ -28,6 +28,8 @@ namespace CourseRegistrationSystem
             mapper.AddMapping<UserMap>();
             mapper.AddMapping<RoleMap>();
             mapper.AddMapping<CourseMap>();
+            mapper.AddMapping<StudentMap>();
+            mapper.AddMapping<StateMap>();
 
             config.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
 

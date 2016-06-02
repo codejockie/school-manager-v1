@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Portal";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Menu</h4>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav navbar-default">
+                        <li class="dropdown btn-default">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">PROFILE <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>@Ajax.ActionLink("Change Password", "changepassword", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "partials", InsertionMode = InsertionMode.Replace })</li>
+                                <li>@Ajax.ActionLink("Student Profile Details", "biodata", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "partials", InsertionMode = InsertionMode.Replace })</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown btn-default">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">COURSE REGISTRATION <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>@Ajax.ActionLink("Register Courses", "preregistration", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "partials", InsertionMode = InsertionMode.Replace })</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown btn-default">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">RESULT <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">View Results</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown btn-default">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">MESSAGE <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>@Ajax.ActionLink("Compose", "compose", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "partials", InsertionMode = InsertionMode.Replace })</li>
+                                <li>@Ajax.ActionLink("Inbox", "inbox", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "partials", InsertionMode = InsertionMode.Replace })</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown btn-default">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">SIGNOUT <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.RouteUrl("logout")">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="container" id="partials">
+                @{ Html.RenderPartial("_Welcome"); }
+            </div>
+        </div>
+    </div>
+</div>

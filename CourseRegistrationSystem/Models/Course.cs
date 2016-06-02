@@ -24,7 +24,7 @@ namespace CourseRegistrationSystem.Models
             Id(x => x.CourseId, x =>
             {
                 x.Column("course_id");
-                x.Generator(Generators.HighLow, g => g.Params(new { max_lo = 100, table = "students_entity_unique_key" }));
+                x.Generator(Generators.Identity);
             });
 
             Property(x => x.CourseCode, x =>
@@ -40,7 +40,7 @@ namespace CourseRegistrationSystem.Models
             Property(x => x.LecturerName, x =>
             {
                 x.Column("lecturer_name");
-                x.NotNullable(true);
+                x.NotNullable(false);
             });
             Property(x => x.Level, x => x.NotNullable(true));
             Property(x => x.Semester, x => x.NotNullable(true));

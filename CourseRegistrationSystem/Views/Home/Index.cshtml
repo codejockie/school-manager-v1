@@ -1,13 +1,61 @@
-﻿@{ 
+﻿@{
     ViewBag.Title = "Home";
 }
 
-<h1>Home Index</h1>
 
-<p>
-    <a href="@Url.RouteUrl("login")">Click here</a> to Login!
-</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="jumbotron">
 
-<p>
-    @Html.RouteLink("Click here", "login") to login!
-</p>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-lg-4">
+            <div class="panel panel-success">
+                <div class="panel-heading" style="color: #FFFFFF; background-color: #008000">
+                    <h3 class="panel-title">
+                        <img alt="NewStudentLogo" src="~/Content/Images/newstudent.png" class="img-rounded pull-right" style="width: 20px; height: 20px"> New Students
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <p>Are you a new student who has just been admitted into the University of Nigeria, Click the link below to verify your portal account and login to your profile to Proceed!</p><br /><br />
+
+                    <ul>
+                        <li><a href="#">Click here to verify your Account</a></li>
+                        <li>Already has account? <a href="@Url.RouteUrl("login")">Click here to log into your profile</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4">
+            <div class="panel panel-success">
+                <div class="panel-heading" style="color: #FFFFFF; background-color: #008000">
+                    <h3 class="panel-title">
+                        <img alt="ReturningLogo" src="~/Content/Images/retstudent.png" class="img-rounded pull-right" style="width: 20px; height: 20px"> Returning Students
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <p>If you are an already existing student of the University; and you are yet to get account in the Portal, Verify your account below and Login to your profile. Already has an account, kindly login to your Profile!</p><br /><br />
+
+                    <ul>
+                        <li><a href="#">Click here to verify your Account</a></li>
+                        <li>Already has account? <a href="@Url.RouteUrl("login")">Click here to log into your profile</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4">
+            <div class="panel panel-success">
+                <div class="panel-heading" style="color: #FFFFFF; background-color: #008000">
+                    <h3 class="panel-title">
+                        <img alt="PGLogo" src="~/Content/Images/pg.jpg" class="img-rounded pull-right" style="width: 20px; height: 20px"> Postgraduate Students
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <p>Prospective Postgraduate Students are advised to check their 2015/2016 Screening results. Already existing Postgraduate Students should kindly proceed to the Postgraduate Portal.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
