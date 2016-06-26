@@ -22,7 +22,7 @@
     @Styles.Render("~/styles")
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-static-top no-margin" role="navigation">
+    <nav class="navbar navbar-inverse navbar-static-top navbar-static-top" role="navigation">
         <div class="container-fluid">
             <!--The container-fluid makes nav start at the leftmost-->
             <div class="navbar-header">
@@ -44,38 +44,35 @@
                         {
                             if (User.IsInRole("admin"))
                             {
-                               <li> @Html.ActionLink("Admin", "index", new { controller = "users", area = "admin" })</li>
-                               <li><a href="#">Welcome back, @User.Identity.Name.ToUpper()</a></li>
-                               <li><a href="@Url.RouteUrl("logout")">Logout</a></li>
+                               <li><a href="@Url.Action("index", new { controller = "users", area = "admin" })">Welcome back, @User.Identity.Name.ToUpper()</a></li>
+                               <li><a href="@Url.RouteUrl("adminlogout")">Logout</a></li>
                             }
 
                             if (User.IsInRole("course adviser"))
                             {
                                 <li> @Html.ActionLink("Course Adviser", "index", new { controller = "home", area = "courseadviser" })</li>
                                 <li><a href="#">Welcome back, @User.Identity.Name.ToUpper()</a></li>
-                                <li><a href="@Url.RouteUrl("logout")">Logout</a></li>
-                            }
-                            if (User.IsInRole("user"))
-                            {
-                                <li>@Html.ActionLink("Profile", "index", "welcome")</li>
+                                <li><a href="@Url.RouteUrl("adminlogout")">Logout</a></li>
                             }
                         }
                         else
                         {
-                            <li><a href="@Url.RouteUrl("login")">Login</a></li>
+                            <li class="@SelectedTabClass("login")"><a href="@Url.RouteUrl("login")">Login</a></li>
+                            <li class="@SelectedTabClass("register")"><a href="@Url.RouteUrl("register")">Register</a></li>
                         }
                 </ul>
             </div>
         </div>
     </nav>
-
+    <div class="container-fluid">
         @RenderBody()
+    </div>
 
     <div class="container">
         <footer>
             @if (!User.Identity.IsAuthenticated)
             {
-                @:&copy; @DateTime.UtcNow.Year - Ozokolo Sandra &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;@Html.RouteLink("Admin", "login")
+                @:&copy; @DateTime.UtcNow.Year - Ozokolo Sandra &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;@Html.RouteLink("Admin", "adminlogin")
             }
         </footer>
     </div>

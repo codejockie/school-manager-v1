@@ -20,14 +20,14 @@ namespace CourseRegistrationSystem
                 .Include("~/content/styles/site.css"));
 
             bundles.Add(new ScriptBundle("~/admin/scripts")
-                .Include("~/scripts/jquery-2.2.1.js")
+                .Include("~/scripts/jquery-{version}.js")
                 .Include("~/scripts/jquery.validate.js")
                 .Include("~/scripts/jquery.validate.unobtrusive.js")
                 .Include("~/scripts/bootstrap.js")
                 .Include("~/areas/admin/scripts/forms.js"));
 
             bundles.Add(new ScriptBundle("~/scripts")
-                .Include("~/scripts/jquery-2.2.1.js")
+                .Include("~/scripts/jquery-{version}.js")
                 .Include("~/scripts/jquery.validate.js")
                 .Include("~/scripts/jquery.validate.unobtrusive.js")
                 .Include("~/scripts/jquery.unobtrusive-ajax.min.js")

@@ -21,14 +21,12 @@ namespace CourseRegistrationSystem
             routes.MapRoute("Login", "login", new { controller = "Auth", action = "Login" }, namespaces);
             routes.MapRoute("Logout", "logout", new { controller = "Auth", action = "Logout" }, namespaces);
 
-            routes.MapRoute("Home", "", new { controller = "Home", action = "Index" }, namespaces);
-            //routes.MapRoute("Welcome_home", "welcome_home", new { controller = "Welcome", action = "Index" }, namespaces);
+            routes.MapRoute("AdminLogin", "adminlogin", new { controller = "Auth", action = "AdminLogin" }, namespaces);
+            routes.MapRoute("AdminLogout", "adminlogout", new { controller = "Auth", action = "AdminLogout" }, namespaces);
 
-            //routes.MapRoute(
-            //    "Welcome_home_default",
-            //    "{controller}/{action}/{id}",
-            //    new { action = "Index", id = UrlParameter.Optional }
-            //);
+            routes.MapRoute("Register", "register", new { controller = "Auth", action = "Register" }, namespaces);
+
+            routes.MapRoute("Home", "", new { controller = "Home", action = "Index" }, namespaces);
         }
     }
 }

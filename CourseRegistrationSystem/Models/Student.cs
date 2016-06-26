@@ -16,17 +16,20 @@ namespace CourseRegistrationSystem.Models
         public virtual string PhoneNumber { get; set; }
         public virtual DateTime DateOfBirth { get; set; }
         public virtual string Gender { get; set; }
-        public virtual int State { get; set; }
+        public virtual string State { get; set; }
         public virtual string LGA { get; set; }
         public virtual string Hometown { get; set; }
-        public virtual string Nationality { get; set; }
+        public virtual string Country { get; set; }
         public virtual string CourseOfStudy { get; set; }
         public virtual string Department { get; set; }
         public virtual string Level { get; set; }
         public virtual string BloodGroup { get; set; }
         public virtual string Genotype { get; set; }
         public virtual string Disability { get; set; }
+        public virtual string SponsorName { get; set; }
+        public virtual string SponsorPhone { get; set; }
         public virtual byte[] Photo { get; set; }
+        public virtual string StudentType { get; set; }
     }
 
     public class StudentMap : ClassMapping<Student>
@@ -61,7 +64,7 @@ namespace CourseRegistrationSystem.Models
             Property(x => x.State, x => x.NotNullable(true));
             Property(x => x.LGA, x => x.NotNullable(true));
             Property(x => x.Hometown, x => x.NotNullable(true));
-            Property(x => x.Nationality, x => x.NotNullable(true));
+            Property(x => x.Country, x => x.NotNullable(true));
             Property(x => x.CourseOfStudy, x =>
             {
                 x.Column("course_of_study");
@@ -76,7 +79,22 @@ namespace CourseRegistrationSystem.Models
             });
             Property(x => x.Genotype, x => x.NotNullable(false));
             Property(x => x.Disability, x => x.NotNullable(false));
+            Property(x => x.SponsorName, x =>
+            {
+                x.Column("sponsor_name");
+                x.NotNullable(true);
+            });
+            Property(x => x.SponsorPhone, x =>
+            {
+                x.Column("sponsor_phone");
+                x.NotNullable(true);
+            });
             Property(x => x.Photo, x => x.NotNullable(false));
+            Property(x => x.StudentType, x =>
+            {
+                x.Column("student_type");
+                x.NotNullable(true);
+            });
         }
     }
 }

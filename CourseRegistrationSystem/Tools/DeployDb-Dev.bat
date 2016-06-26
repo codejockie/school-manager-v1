@@ -1,1 +1,1 @@
-..\..\packages\fluentmigrator.1.6.1\tools\migrate.exe --db=mysql --target=..\bin\courseregistrationsystem.dll --configPath=..\Web.config -c=MainDb
+..\..\packages\fluentmigrator.1.6.2\tools\migrate.exe --db=mysql --target=..\bin\courseregistrationsystem.dll --configPath=..\Web.config -c=MainDb

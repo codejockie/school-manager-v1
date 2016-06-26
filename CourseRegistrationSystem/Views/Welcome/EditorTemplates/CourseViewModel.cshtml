@@ -1,0 +1,19 @@
+﻿@model CourseRegistrationSystem.ViewModels.CourseViewModel
+
+<tr class="text-uppercase">
+    <td>
+        @Html.CheckBoxFor(m => m.IsSelected, new { @class = "chkSelect" }) @Html.HiddenFor(m => m.Id)
+    </td>
+    <td>
+        @Html.DisplayFor(cc => cc.CourseCode)
+    </td>
+    <td>
+        @Html.DisplayFor(ct => ct.CourseTitle)
+    </td>
+    <td style="text-align: center;">
+        @Html.DisplayFor(c => c.Credit)
+    </td>
+    <td id="courseType">
+        @Html.DisplayFor(t => t.Type)
+    </td>
+</tr>

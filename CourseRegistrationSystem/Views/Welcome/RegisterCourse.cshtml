@@ -1,0 +1,147 @@
+﻿@model CourseRegistrationSystem.ViewModels.CourseSelectionViewModel
+
+
+<div class="col-md-8 col-md-offset-1">
+    <hr />
+    <h4 class="table-caption">COURSE REGISTRATION FORM</h4>
+    <table class="details-table">
+        <tbody>
+            <tr>
+                <td>Full Name: </td>
+                <td class="d-text"><span class="text-uppercase">@(Model.FullName)</span></td>
+                <td class="d-title">Session: </td>
+                <td class="d-text">
+                    @{
+                        if (DateTime.Now.Month >= 10)
+                        {
+                            @: <span class="text-uppercase">@DateTime.Now.Year/@(DateTime.Now.Year + 1)</span>
+                        }
+                        else
+                        {
+                            @: <span class="text-uppercase">@(DateTime.Now.Year - 1)/@DateTime.Now.Year</span>
+                        }
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>Department: </td>
+                <td class="d-text">
+                    <span class="text-uppercase">
+                        @Model.Department
+                    </span>
+                </td>
+                <td class="d-title">Semester: </td>
+                <td class="d-text">
+                    @{
+                        if (DateTime.Now.Month <= 4 || DateTime.Now.Month >= 10)
+                        {
+                            @: <span class="text-uppercase">First Semester</span>
+                        }
+                        else
+                        {
+                            @: <span class="text-uppercase">Second Semester</span>
+                        }
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>Student type: </td>
+                <td class="d-text"><span class="text-uppercase">@Model.StudentType</span></td>
+                <td class="d-title">Maximum Unit: </td>
+                <td class="d-text"><strong>24</strong></td>
+            </tr>
+            <tr>
+                <td>Matric number: </td>
+                <td class="d-text">@(Model.RegistrationNumber)</td>
+                <td class="d-title">Minimum Unit: </td>
+                <td class="d-text"><strong>15</strong></td>
+            </tr>
+            <tr>
+                <td>Level: </td>
+                <td class="d-text">
+                    @{
+                        switch (Model.Level)
+                        {
+                            case "LevelOne": <span class="text-uppercase"> 100 Level</span> break;
+                            case "LevelTwo": <span class="text-uppercase"> 200 Level</span> break;
+                            case "LevelThree": <span class="text-uppercase"> 300 Level</span> break;
+                            case "LevelFour": <span class="text-uppercase"> 400 Level</span> break;
+                            case "LevelFive": <span class="text-uppercase"> 500 Level</span> break;
+                        }
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <hr />
+    <div class="registration-info">
+        <p>Please click on the "<span style="color: red; font-weight: bold">Check Boxes</span>" beside each course to select a course or courses...</p>
+        <p><span style="color: red; font-weight: bold">NOTE:</span> You cannot delete courses that have been aproved by your course advisor</p>
+        <p>Click here to @Html.ActionLink("Add/Borrow Courses", "BorrowCourses", null, new { target = "_blank" })</p>
+    </div>
+
+    <div>
+        @using (Html.BeginForm())
+        {
+            <table class="table table-condensed courses-table">
+                <thead>
+                    <tr style="font-size: 12px;">
+                        <th>Register</th>
+                        <th>Course Code</th>
+                        <th style="text-align: center;">Course Title</th>
+                        <th>Unit</th>
+                        <th>Course Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @Html.EditorFor(m => m.Courses)
+                </tbody>
+            </table>
+            <br />
+
+                <div>
+                    <input type="submit" value="Register Course" class="btn btn-primary" id="btn-register" />
+                </div>
+
+                <hr />
+                <br />
+                <hr />
+                <script>
+                    $("#chkSelectAll").bind("change", function () {
+                        $(".chkSelect").prop("checked", $(this).prop("checked"));
+                    });
+                    $(".chkSelect").bind("change", function () {
+                        if (!$(this).prop("checked"))
+                            $("#chkSelectAll").prop("checked", false);
+                    });
+
+                    $("#courseType:contains(Elective)").each(function () {
+                        $(this).addClass("btn btn-link")
+                            .attr({
+                                'data-container': 'body',
+                                "data-toggle": "tooltip",
+                                "data-placement": "top",
+                                "data-content": "This is an elective course",
+                                "data-original-title": "ToolTip",
+                                "title": ""
+                            });
+                    });
+                </script>
+        }
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+        $(function () {
+            $("#courseType").hover(
+                function () {
+
+                },
+                function () {
+
+                });
+        });
+    </script>
+}

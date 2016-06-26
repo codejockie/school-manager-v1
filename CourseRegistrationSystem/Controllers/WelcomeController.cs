@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace CourseRegistrationSystem.Controllers
 {
-    [Authorize(Roles = "user")]
+    [Authorize(Roles = "student")]
     [RoutePrefix("welcome")]
     [Route("{action=Index}/{id=}")]
     public class WelcomeController : Controller
@@ -23,9 +23,7 @@ namespace CourseRegistrationSystem.Controllers
         [Route("index")]
         public ActionResult Index()
         {
-            return View(new WelcomeIndex
-            {
-            });
+            return View();
         }
 
         public ActionResult Welcome()
@@ -35,15 +33,15 @@ namespace CourseRegistrationSystem.Controllers
 
         public ActionResult ChangePassword()
         {
-            var query = from i in Database.Session.Query<User>()
-                        where i.Username == User.Identity.Name
-                        select i.Id;
-            var id = query.First();
+            var id = (from i in Database.Session.Query<User>()
+                      where i.Username == User.Identity.Name
+                      select i.Id).First();
             var user = Database.Session.Load<User>(id);
+
             if (user == null)
                 return HttpNotFound();
 
-            return PartialView("_ChangePassword", new WelcomeChangePassword
+            return PartialView("ChangePassword", new WelcomeChangePassword
             {
                 Username = user.Username,
             });
@@ -52,18 +50,18 @@ namespace CourseRegistrationSystem.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult ChangePassword(WelcomeChangePassword form)
         {
-            var query = from i in Database.Session.Query<User>()
-                        where i.Username == User.Identity.Name
-                        select i.Id;
-            var id = query.First();
+            var id = (from i in Database.Session.Query<User>()
+                      where i.Username == User.Identity.Name
+                      select i.Id).First();
             var user = Database.Session.Load<User>(id);
+
             if (user == null)
                 return HttpNotFound();
 
             form.Username = user.Username;
 
             if (!ModelState.IsValid)
-                return View(form);
+                return PartialView(form);
 
             user.SetPassword(form.Password);
             Database.Session.Update(user);
@@ -73,13 +71,13 @@ namespace CourseRegistrationSystem.Controllers
 
         public ActionResult Biodata()
         {
-            ViewBag.State = new SelectList(Database.Session.Query<State>().ToList(), "Id", "Name");
-
-            var query = Database.Session.Query<Student>().Where(s => s.RegistrationNumber == User.Identity.Name).Select(s => s.Id);
-            var id = query.First();
+            var id = Database.Session.Query<Student>().Where(s => s.RegistrationNumber == User.Identity.Name).Select(s => s.Id).First();
             var student = Database.Session.Load<Student>(id);
 
-            return PartialView("_Biodata", new WelcomeBiodata
+            if (student == null)
+                return HttpNotFound();
+
+            return PartialView("Biodata", new WelcomeBiodata
             {
                 FirstName = student.FirstName,
                 LastName = student.LastName,
@@ -88,39 +86,151 @@ namespace CourseRegistrationSystem.Controllers
                 Email = student.Email,
                 Address = student.Address,
                 PhoneNumber = student.PhoneNumber,
-                DateOfBirth = student.DateOfBirth.Date,
-                Gender = student.Gender,
-                State = student.State,
+                DateOfBirth = student.DateOfBirth.ToShortDateString(),
+                Gender = (Gender)Enum.Parse(typeof(Gender), student.Gender),
+                SponsorName = student.SponsorName,
+                SponsorPhone = student.SponsorPhone,
+                State = (States)Enum.Parse(typeof(States), student.State),
                 LGA = student.LGA,
                 Hometown = student.Hometown,
-                Nationality = student.Nationality,
+                Country = (Country)Enum.Parse(typeof(Country), student.Country),
                 CourseOfStudy = student.CourseOfStudy,
                 Department = student.Department,
-                Level = student.Level,
-                BloodGroup = student.BloodGroup,
-                Genotype = student.Genotype,
-                Disability = student.Disability
+                Level = (Level)Enum.Parse(typeof(Level), student.Level),
+                BloodGroup = (BloodGroup)Enum.Parse(typeof(BloodGroup), student.BloodGroup),
+                Genotype = (Genotype)Enum.Parse(typeof(Genotype), student.Genotype),
+                Disability = (Disability)Enum.Parse(typeof(Disability), student.Disability)
             });
         }
 
-        public PartialViewResult PreRegistration()
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Biodata(WelcomeBiodata form)
         {
-            return PartialView("_PreRegistration");
+            var id = Database.Session.Query<Student>().Where(s => s.RegistrationNumber == User.Identity.Name).Select(s => s.Id).First();
+            var student = Database.Session.Load<Student>(id);
+
+            if (student == null)
+                return HttpNotFound();
+
+            if (!ModelState.IsValid)
+                return PartialView(form);
+
+            student.Email = form.Email;
+            student.Address = form.Address;
+            student.PhoneNumber = form.PhoneNumber;
+            student.BloodGroup = form.BloodGroup.ToString();
+            student.Genotype = form.Genotype.ToString();
+            student.Disability = form.Disability.ToString();
+
+            Database.Session.SaveOrUpdate(student);
+
+            return RedirectToAction("index");
         }
 
         public ActionResult RegisterCourse()
         {
-            return PartialView("_RegisterCourse");
+            List<Course> courses;
+            var model = new CourseSelectionViewModel();
+
+            var id = Database.Session.Query<Student>()
+                .Where(s => s.RegistrationNumber == User.Identity.Name)
+                .Select(s => s.Id).First();
+            var student = Database.Session.Load<Student>(id);
+
+            if (student == null)
+                return HttpNotFound();
+
+            model.FirstName = student.FirstName;
+            model.LastName = student.LastName;
+            model.MiddleName = student.MiddleName;
+            model.RegistrationNumber = student.RegistrationNumber;
+            model.Department = student.Department;
+            model.Level = student.Level;
+            model.StudentType = student.StudentType;
+
+            string studentLevel = null;
+
+            switch (student.Level)
+            {
+                case "LevelOne": studentLevel = "100"; break;
+                case "LevelTwo": studentLevel = "200"; break;
+                case "LevelThree": studentLevel = "300"; break;
+                case "LevelFour": studentLevel = "400"; break;
+                case "LevelFive": studentLevel = "500"; break;
+            }
+
+            if (DateTime.Now.Month <= 4 || DateTime.Now.Month >= 10)
+            {
+                courses = Database.Session.Query<Course>()
+                    .Where(c => c.Level == studentLevel && c.Semester == "First").ToList();
+            }
+            else
+            {
+                courses = Database.Session.Query<Course>()
+                    .Where(c => c.Level == studentLevel && c.Semester == "Second").ToList();
+            }
+
+            foreach (var course in courses)
+            {
+                model.Courses.Add(new CourseViewModel
+                {
+                    Id = course.CourseId,
+                    CourseCode = course.CourseCode,
+                    CourseTitle = course.CourseTitle,
+                    Credit = course.Credit,
+                    Type = course.Type,
+                    IsSelected = false
+                });
+            }
+
+            return PartialView("RegisterCourse", model);
         }
 
-        public ActionResult Compose()
+        [HttpPost]
+        public ActionResult RegisterCourse(CourseSelectionViewModel form)
         {
-            return PartialView("_Compose");
-        }
+            var courses = Database.Session.Query<Course>().ToList();
 
-        public ActionResult Inbox()
-        {
-            return PartialView("_Inbox");
+            var id = Database.Session.Query<Student>()
+                .Where(s => s.RegistrationNumber == User.Identity.Name)
+                .Select(s => s.Id).First();
+            var student = Database.Session.Load<Student>(id);
+
+            if (student == null)
+                return HttpNotFound();
+
+            var selectedIds = form.getSelectedIds();
+
+            // Use the ids to retrieve the records for the selected course
+            // from the database:
+            var selectedCourse = from x in courses
+                                 where selectedIds.Contains(x.CourseId)
+                                 select x;
+
+            //// Process according to your requirements:
+            try
+            {
+                foreach (var course in selectedCourse)
+                {
+                    var enrollment = new Enrollment
+                    {
+                        CourseId = course.CourseId,
+                        StudentId = student.Id,
+                        Status = "Pending".ToUpper()
+                    };
+                    Database.Session.Save(enrollment);
+                }
+                ViewBag.Message = "Registration successful";
+                return RedirectToAction("index");
+            }
+            catch
+            {
+                ViewBag.Message = "Oops! We are sorry, an error occurred while processing your request.\nPlease try again later";
+                return RedirectToAction("index");
+            }
+            // Redirect somewhere meaningful (probably to somewhere showing 
+            // the results of your processing):
+
         }
     }
 }

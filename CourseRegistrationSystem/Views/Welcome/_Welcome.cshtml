@@ -1,5 +1,9 @@
-﻿<div class="container">
-    <div class="col-md-6 col-md-offset-3">
-        <h4>Welcome @User.Identity.Name to your portal</h4>
-    </div>
+﻿@using NHibernate.Linq
+@using CourseRegistrationSystem.Models
+@{ 
+    var id = Database.Session.Query<Student>().Where(s => s.RegistrationNumber == User.Identity.Name).Select(s => s.Id).First();
+    var student = Database.Session.Load<Student>(id);
+}
+<div class="col-md-6 col-md-offset-3">
+    <h4>Welcome @student.FirstName @student.LastName @student.MiddleName to your profile page</h4>
 </div>

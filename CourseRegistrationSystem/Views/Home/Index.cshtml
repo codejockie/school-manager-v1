@@ -3,13 +3,17 @@
 }
 
 
-<div class="container-fluid">
-    <div class="row">
+<div class="container">
         <div class="jumbotron">
-
+            <h1>Computer Science Department Portal</h1>
+            <p class="text-justify">
+                Welcome to the Departmental Portal. This portal was developed in ASP.NET MVC 5 using various technologies like HTML5, CSS3, JavaScript for Client-side, and C# for the Server-side. The Website is mobile-friendly as it uses the famous Bootstrap framework in the frontend.
+            </p>
+            <p class="text-justify">
+                It improves on the current school portal in areas like automated semester and session determination in that students no longer need to select their level, the current session and semeter. On the course registration side courses are automatically populated based on student's level, and current semeter.
+            </p>
         </div>
 
-    </div>
     <div class="row">
         <div class="col-md-4 col-lg-4">
             <div class="panel panel-success">
@@ -19,11 +23,10 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <p>Are you a new student who has just been admitted into the University of Nigeria, Click the link below to verify your portal account and login to your profile to Proceed!</p><br /><br />
+                    <p class="text-justify">Are you a new student who has just been admitted into the University of Nigeria, Click the link below to verify your portal account and login to your profile to Proceed!</p><br />
 
                     <ul>
-                        <li><a href="#">Click here to verify your Account</a></li>
-                        <li>Already has account? <a href="@Url.RouteUrl("login")">Click here to log into your profile</a></li>
+                        <li><a href="@Url.RouteUrl("register")">Click here to Register</a></li>
                     </ul>
                 </div>
             </div>
@@ -36,11 +39,11 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <p>If you are an already existing student of the University; and you are yet to get account in the Portal, Verify your account below and Login to your profile. Already has an account, kindly login to your Profile!</p><br /><br />
+                    <p class="text-justify">If you are an already existing student of the University; and you are yet to get an account in the Portal, Verify your account below to Login to your profile. Already have an account? Kindly login to your Profile!</p><br />
 
                     <ul>
                         <li><a href="#">Click here to verify your Account</a></li>
-                        <li>Already has account? <a href="@Url.RouteUrl("login")">Click here to log into your profile</a></li>
+                        <li>Already have an account? <a href="@Url.RouteUrl("login")">Click here to log into your profile</a></li>
                     </ul>
                 </div>
             </div>
@@ -53,7 +56,7 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <p>Prospective Postgraduate Students are advised to check their 2015/2016 Screening results. Already existing Postgraduate Students should kindly proceed to the Postgraduate Portal.</p>
+                    <p class="text-justify">Prospective Postgraduate Students are advised to check their 2015/2016 Screening results. Already existing Postgraduate Students should kindly proceed to the Postgraduate Portal.</p>
                 </div>
             </div>
         </div>

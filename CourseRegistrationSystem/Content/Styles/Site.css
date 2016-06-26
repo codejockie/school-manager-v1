@@ -1,1 +1,45 @@
-﻿
+﻿.table-caption {
+    text-align: center;
+    font-family: 'Times New Roman';
+    font-size: 14px;
+    font-weight: bolder;
+}
+.details-table {
+    font-family: 'Times New Roman', Times, serif;
+}
+.details-table td {
+    padding: 0px 15px;
+}
+.courses-table {
+    font-family: 'Times New Roman';
+}
+.courses-table th {
+    font-size: 12px;
+    border: 1px solid gray;
+}
+.courses-table td {
+    border-color: orange;
+    color: orange;
+    font-size: 13px;
+}
+/*.crs-font {
+    font-weight: bold;
+    font-size: 14px;
+    font-family: 'Times New Roman', Arial, serif, Verdana;
+}*/
+#btn-register {
+    position: relative;
+    font-family: 'Times New Roman';
+    left: 150px;
+}
+table tbody tr td.d-title {
+    padding: 2px 15px;
+}
+table tbody tr td.d-text {
+    font-size: 13px;
+}
+div.registration-info p {
+    text-align: center;
+    line-height: 10px;
+    font-family: 'Times New Roman';
+}
