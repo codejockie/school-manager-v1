@@ -115,17 +115,29 @@
                             $("#chkSelectAll").prop("checked", false);
                     });
 
-                    $("#courseType:contains(Elective)").each(function () {
-                        $(this).addClass("btn btn-link")
+                    $(".courseType:contains(Elective)").each(function () {
+                        $(this).addClass("btn btn-primary").css("color", "white")
                             .attr({
                                 'data-container': 'body',
-                                "data-toggle": "tooltip",
-                                "data-placement": "top",
+                                "data-toggle": "popover",
+                                "data-placement": "right",
                                 "data-content": "This is an elective course",
-                                "data-original-title": "ToolTip",
+                                "data-original-title": "",
                                 "title": ""
                             });
                     });
+
+                    function pop_over() {
+                        $('[data-toggle="popover"]').popover()
+                    }
+
+                    pop_over();  // Call in document ready for elements already present
+
+                    $.ajax({
+                        success: function (data) {
+                            pop_over();  // Call function again for AJAX loaded content
+                        }
+                    })
                 </script>
         }
     </div>

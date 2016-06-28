@@ -6,8 +6,8 @@
 
 @helper SelectedTabClass(string tabName)
 {
-    if (tabName == ViewBag.SelectedTab)
-    {
+if (tabName == ViewBag.SelectedTab)
+{
         @: active
     }
 }
@@ -20,6 +20,7 @@
     <title>@ViewBag.Title - CourseRegistrationSystem</title>
 
     @Styles.Render("~/styles")
+    <link href="~/Content/themes/base/all.css" rel="stylesheet" />
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-static-top navbar-static-top" role="navigation">
@@ -39,40 +40,49 @@
                 <!--navbar-right takes nav right-->
                 <ul class="nav navbar-nav">
                     @*<li class="@SelectedTabClass("home")"><a href="@Url.RouteUrl("home")">Home</a></li>*@
-                    
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            if (User.IsInRole("admin"))
-                            {
-                               <li><a href="@Url.Action("index", new { controller = "users", area = "admin" })">Welcome back, @User.Identity.Name.ToUpper()</a></li>
-                               <li><a href="@Url.RouteUrl("adminlogout")">Logout</a></li>
-                            }
 
-                            if (User.IsInRole("course adviser"))
-                            {
-                                <li> @Html.ActionLink("Course Adviser", "index", new { controller = "home", area = "courseadviser" })</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("admin"))
+                        {
+                            <li><a href="@Url.Action("index", new { controller = "users", area = "admin" })">Welcome back, @User.Identity.Name.ToUpper()</a></li>
+                            <li><a href="@Url.RouteUrl("adminlogout")">Logout</a></li>
+                        }
+
+                        if (User.IsInRole("course adviser"))
+                        {
+                            <li> @Html.ActionLink("Course Adviser", "index", new { controller = "home", area = "courseadviser" })</li>
                                 <li><a href="#">Welcome back, @User.Identity.Name.ToUpper()</a></li>
                                 <li><a href="@Url.RouteUrl("adminlogout")">Logout</a></li>
-                            }
                         }
-                        else
-                        {
-                            <li class="@SelectedTabClass("login")"><a href="@Url.RouteUrl("login")">Login</a></li>
+                    }
+                    else
+                    {
+                        <li class="@SelectedTabClass("login")"><a href="@Url.RouteUrl("login")">Login</a></li>
                             <li class="@SelectedTabClass("register")"><a href="@Url.RouteUrl("register")">Register</a></li>
-                        }
+                    }
                 </ul>
             </div>
         </div>
     </nav>
     <div class="container-fluid">
+        @{ Html.RenderPartial("_Alerts"); }
         @RenderBody()
     </div>
 
-    <div class="container">
+    <div class="container bottom-footer">
         <footer>
             @if (!User.Identity.IsAuthenticated)
             {
-                @:&copy; @DateTime.UtcNow.Year - Ozokolo Sandra &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;@Html.RouteLink("Admin", "adminlogin")
+                <div class="col-md-5 pull-right">
+                    <a href="#">&copy; Ozokolo Sandra @DateTime.UtcNow.Year <img class="img-responsive img-circle" id="img-footer" src="~/Content/Images/sandie.jpg" /></a>
+                </div>
+                <div class="col-md-7">
+                    <ul class="footer-nav">
+                        <li>@Html.RouteLink("Admin", "adminlogin")</li>
+                        <li>@Html.RouteLink("Course Adviser", "adminlogin")</li>
+                    </ul>
+                </div>
             }
         </footer>
     </div>

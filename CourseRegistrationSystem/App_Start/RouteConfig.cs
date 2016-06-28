@@ -25,6 +25,7 @@ namespace CourseRegistrationSystem
             routes.MapRoute("AdminLogout", "adminlogout", new { controller = "Auth", action = "AdminLogout" }, namespaces);
 
             routes.MapRoute("Register", "register", new { controller = "Auth", action = "Register" }, namespaces);
+            routes.MapRoute("NewStudent", "newstudent", new { controller = "Auth", action = "newstudent" }, namespaces);
 
             routes.MapRoute("Home", "", new { controller = "Home", action = "Index" }, namespaces);
         }

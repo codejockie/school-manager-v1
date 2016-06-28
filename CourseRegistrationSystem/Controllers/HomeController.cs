@@ -9,7 +9,7 @@ using System.Web.Mvc;
 namespace CourseRegistrationSystem.Controllers
 {
     [SelectedTab("home")]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public ActionResult Index()
         {

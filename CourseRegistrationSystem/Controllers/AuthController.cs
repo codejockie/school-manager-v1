@@ -11,7 +11,7 @@ using System.Web.Security;
 
 namespace CourseRegistrationSystem.Controllers
 {
-    public class AuthController : Controller
+    public class AuthController : BaseController
     {
         public ActionResult Logout()
         {
@@ -89,13 +89,52 @@ namespace CourseRegistrationSystem.Controllers
         {
             if (!ModelState.IsValid)
             {
+                Danger("Looks like something went wrong. Please check your form.", true);
                 return View(form);
             }
 
+            TempData["matricno"] = form.RegistrationNumber;
+            TempData["email"] = form.Email;
             byte[] uploadedPhoto = new byte[form.Photo.InputStream.Length];
             form.Photo.InputStream.Read(uploadedPhoto, 0, uploadedPhoto.Length); //TODO: pass the byte array to model and store in the Db
-            ViewBag.Message = "Registration was successful";
-            return View();
+            
+            //int lastStudentId = Database.Session.Query<Student>().Max(x => x.Id);
+            return RedirectToAction("newstudent", "auth");
+        }
+
+        public ActionResult NewStudent()
+        {
+            AuthNewStudent newStudent = null;
+
+            if (TempData["matricno"] != null && TempData["email"] != null)
+            {
+                newStudent = new AuthNewStudent
+                {
+                    Username = TempData["matricno"].ToString(),
+                    Email = TempData["email"].ToString()
+                };
+            }
+
+            return View(newStudent);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult NewStudent(AuthNewStudent form)
+        {
+            var user = new User();
+
+            if (Database.Session.Query<User>().Any(u => u.Username == form.Username))
+                ModelState.AddModelError("Username", "Username must be unique");
+
+            if (!ModelState.IsValid)
+                return View(form);
+
+            user.Email = form.Email;
+            user.Username = form.Username;
+            user.SetPassword(form.Password);
+
+            Database.Session.Save(user);
+            return View(); // TODO: add the code to insert a new user to the users table
         }
     }
 }

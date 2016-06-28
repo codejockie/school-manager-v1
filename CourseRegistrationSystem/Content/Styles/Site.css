@@ -43,3 +43,36 @@ div.registration-info p {
     line-height: 10px;
     font-family: 'Times New Roman';
 }
+#accordion ul li {
+    font-size: 13px;
+}
+.bottom-footer {
+    border-top: 1px solid #b2b2b2;
+    margin-top: 100px;
+    padding-top: 10px;
+    color: #b2b2b2;
+}
+.footer-nav {
+    text-align: left;
+    list-style: none;
+}
+.footer-nav li {
+    display: inline;
+}
+.footer-nav li:not(:first-child):before {
+    content: ' | ';
+    padding: 0px 10px;
+}
+.footer-nav a {
+    color: #b2b2b2;
+}
+.footer-nav a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+#img-footer {
+    width: 41px;
+    height: 41px;
+    vertical-align: middle;
+    display: inline;
+}

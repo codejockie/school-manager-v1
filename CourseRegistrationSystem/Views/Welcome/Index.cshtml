@@ -4,63 +4,42 @@
 
 <div class="row">
     <div class="col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">Menu</h4>
+        <div id="accordion">
+            <h3>Profile</h3>
+            <div>
+                <ul>
+                    <li>@Ajax.ActionLink("Change Password", "changepassword", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "partials", InsertionMode = InsertionMode.Replace })</li>
+                    <li>@Ajax.ActionLink("Student Profile Details", "biodata", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "partials", InsertionMode = InsertionMode.Replace })</li>
+                </ul>
             </div>
-            <div class="panel-body">
-                <ul class="nav navbar-default">
-                    <li class="dropdown btn-default">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">PROFILE <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>@Ajax.ActionLink("Change Password", "changepassword", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "partials", InsertionMode = InsertionMode.Replace })</li>
-                            <li>@Ajax.ActionLink("Student Profile Details", "biodata", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "partials", InsertionMode = InsertionMode.Replace })</li>
-                        </ul>
-                    </li>
-                    <li class="dropdown btn-default">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">COURSE REGISTRATION <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>@Ajax.ActionLink("Registration rule", "", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "partials", InsertionMode = InsertionMode.Replace })</li>
-                            <li>@Ajax.ActionLink("Register Courses", "registercourse", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "partials", InsertionMode = InsertionMode.Replace })</li>
-                        </ul>
-                    </li>
-                    <li class="dropdown btn-default">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">RESULT <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">View Results</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown btn-default">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">MESSAGE <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>@Ajax.ActionLink("Compose", "compose", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "partials", InsertionMode = InsertionMode.Replace })</li>
-                            <li>@Ajax.ActionLink("Inbox", "inbox", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "partials", InsertionMode = InsertionMode.Replace })</li>
-                        </ul>
-                    </li>
-                    <li class="dropdown btn-default">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">SIGNOUT <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="@Url.RouteUrl("logout")">Logout</a></li>
-                        </ul>
-                    </li>
+            <h3>Course Registration</h3>
+            <div>
+                <ul>
+                    <li>@Ajax.ActionLink("Registration rule", "", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "partials", InsertionMode = InsertionMode.Replace })</li>
+                    <li>@Ajax.ActionLink("Register Courses", "registercourse", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "partials", InsertionMode = InsertionMode.Replace })</li>
+                </ul>
+            </div>
+            <h3>Message</h3>
+            <div>
+                <ul>
+                    <li>@Ajax.ActionLink("Compose", "compose", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "partials", InsertionMode = InsertionMode.Replace })</li>
+                    <li>@Ajax.ActionLink("Inbox", "inbox", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "partials", InsertionMode = InsertionMode.Replace })</li>
+                </ul>
+            </div>
+            <h3>Signout</h3>
+            <div>
+                <ul>
+                    <li><a href="@Url.RouteUrl("logout")">Logout</a></li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="col-md-9 container" id="partials">
-        <div class="alert alert-dismissible alert-info">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            @ViewBag.Message</div>
         <div>
             @{ Html.RenderPartial("_Welcome"); }
         </div>
     </div>
 </div>
 @section Scripts{
-        <script>
-            $(document).ready(function () {
-                $(".alert").hide();
-            });
-
-        </script>
-    }
+    
+}

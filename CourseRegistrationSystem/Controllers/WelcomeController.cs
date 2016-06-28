@@ -12,7 +12,7 @@ namespace CourseRegistrationSystem.Controllers
     [Authorize(Roles = "student")]
     [RoutePrefix("welcome")]
     [Route("{action=Index}/{id=}")]
-    public class WelcomeController : Controller
+    public class WelcomeController : BaseController
     {
         public WelcomeController()
         {
@@ -220,17 +220,14 @@ namespace CourseRegistrationSystem.Controllers
                     };
                     Database.Session.Save(enrollment);
                 }
-                ViewBag.Message = "Registration successful";
+                Success("Registration successful", true);
                 return RedirectToAction("index");
             }
             catch
             {
-                ViewBag.Message = "Oops! We are sorry, an error occurred while processing your request.\nPlease try again later";
+                Danger("Oops! We are sorry, an error occurred while processing your request.\nPlease try again later");
                 return RedirectToAction("index");
             }
-            // Redirect somewhere meaningful (probably to somewhere showing 
-            // the results of your processing):
-
         }
     }
 }

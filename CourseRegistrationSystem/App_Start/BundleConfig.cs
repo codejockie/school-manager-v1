@@ -28,10 +28,12 @@ namespace CourseRegistrationSystem
 
             bundles.Add(new ScriptBundle("~/scripts")
                 .Include("~/scripts/jquery-{version}.js")
+                .Include("~/scripts/jquery-ui-{version}.js")
                 .Include("~/scripts/jquery.validate.js")
                 .Include("~/scripts/jquery.validate.unobtrusive.js")
                 .Include("~/scripts/jquery.unobtrusive-ajax.min.js")
-                .Include("~/scripts/bootstrap.js"));
+                .Include("~/scripts/bootstrap.js")
+                .Include("~/scripts/jk-site.js"));
         }
     }
 }
