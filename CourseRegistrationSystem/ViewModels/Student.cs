@@ -1,4 +1,5 @@
-﻿using CourseRegistrationSystem.Models;
+﻿using CourseRegistrationSystem.Infrastructure;
+using CourseRegistrationSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 
 namespace CourseRegistrationSystem.ViewModels
@@ -55,7 +57,13 @@ namespace CourseRegistrationSystem.ViewModels
     }
     public class WelcomeIndex
     {
+        public string FirstName { get; set; }
         public byte[] Photo { get; set; }
+
+        [Required]
+        [FileSize(150000)]
+        [FileTypes("jpg,jpeg")]
+        public HttpPostedFileBase ProfilePic { get; set; }
     }
     public class WelcomeBiodata
     {
@@ -121,7 +129,6 @@ namespace CourseRegistrationSystem.ViewModels
 
         [Required, Display(Name = "Sponsor's Phone")]
         public string SponsorPhone { get; set; }
-        public byte[] Photo { get; set; }
     }
 
     public class WelcomeChangePassword

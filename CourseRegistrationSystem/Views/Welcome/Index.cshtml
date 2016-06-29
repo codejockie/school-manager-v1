@@ -1,4 +1,6 @@
-﻿@{
+﻿@model CourseRegistrationSystem.ViewModels.WelcomeIndex
+
+@{
     ViewBag.Title = "Portal";
 }
 
@@ -33,6 +35,50 @@
                 </ul>
             </div>
         </div>
+
+        <div>
+            <br />
+            @{
+                byte[] photo = Model.Photo;
+
+                if (photo != null)
+                {
+                    <img src="data:image/jpg;base64,@Convert.ToBase64String(photo, Base64FormattingOptions.None)" alt="@Model.FirstName Picture" class="img-responsive img-circle" id="profile-img" />
+                    using (Html.BeginForm("Upload", "Welcome", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <br />
+                        <fieldset>
+                            <div>
+                                @Html.TextBoxFor(x => x.ProfilePic, new { type = "file" })
+                                <p class="help-block">Image size must be &lt;= 150KB in size. Supported file types: jpg, jpeg </p>
+                                <input type="submit" value="Upload" />
+                            </div>
+                        </fieldset>
+                    }
+                }
+                else
+                {
+                    using (Html.BeginForm("Upload", "Welcome", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <br />
+                        <fieldset>
+                            <div class="editor-field">
+                                @Html.TextBoxFor(x => x.ProfilePic, new { type = "file" })
+                                <p class="help-block">Image size must be &lt;= 150KB in size. Supported file types: jpg, jpeg </p>
+                            </div>
+
+                            <div class="editor-field">
+                                <input type="submit" value="Upload" />
+                            </div>
+                        </fieldset>
+                    }
+                }
+            }
+        </div>
     </div>
     <div class="col-md-9 container" id="partials">
         <div>
@@ -41,5 +87,5 @@
     </div>
 </div>
 @section Scripts{
-    
+
 }

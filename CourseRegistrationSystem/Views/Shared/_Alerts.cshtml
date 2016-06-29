@@ -1,24 +1,28 @@
 ﻿@using CourseRegistrationSystem.Helpers
 
-@{
-    var alerts = TempData.ContainsKey(Alert.TempDataKey)
-                ? (List<Alert>)TempData[Alert.TempDataKey]
-                : new List<Alert>();
+<div class="container">
+    @{
+        var alerts = TempData.ContainsKey(Alert.TempDataKey)
+                    ? (List<Alert>)TempData[Alert.TempDataKey]
+                    : new List<Alert>();
 
-    if (alerts.Any())
-    {
-        <hr />
-    }
+        if (alerts.Any())
+        {
+            <hr id="alerthr" />
+        }
 
-    foreach (var alert in alerts)
-    {
-        var dismissableClass = alert.Dismissable ? "alert-dismissable" : null;
-        <div class="alert alert-@alert.AlertStyle @dismissableClass">
-            @if (alert.Dismissable)
-            {
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">times</button>
-            }
-            @Html.Raw(alert.Message)
-        </div>
+        foreach (var alert in alerts)
+        {
+            var dismissableClass = alert.Dismissable ? "alert-dismissable" : null;
+            <div class="alert alert-@alert.AlertStyle @dismissableClass">
+                @if (alert.Dismissable)
+                {
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                        <span id="alertdismiss">&times;</span>
+                    </button>
+                }
+                @Html.Raw(alert.Message)
+            </div>
+        }
     }
-}
+</div>

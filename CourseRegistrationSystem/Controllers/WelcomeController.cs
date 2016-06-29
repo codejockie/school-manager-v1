@@ -14,16 +14,41 @@ namespace CourseRegistrationSystem.Controllers
     [Route("{action=Index}/{id=}")]
     public class WelcomeController : BaseController
     {
-        public WelcomeController()
-        {
-
-        }
+        public WelcomeController(){}
         // GET: Welcome
         [Route]
         [Route("index")]
         public ActionResult Index()
         {
-            return View();
+            var id = Database.Session.Query<Student>().Where(s => s.RegistrationNumber == User.Identity.Name).Select(s => s.Id).First();
+            var student = Database.Session.Load<Student>(id);
+            TempData["studentid"] = id;
+
+            var model = new WelcomeIndex { FirstName = student.FirstName, Photo = student.Photo };
+
+            return View(model);
+        }
+
+        public ActionResult Upload(WelcomeIndex form)
+        {
+            var student = Database.Session.Load<Student>(TempData["studentid"]);
+
+            byte[] uploadedPhoto = new byte[form.ProfilePic.InputStream.Length];
+            form.ProfilePic.InputStream.Read(uploadedPhoto, 0, uploadedPhoto.Length);
+
+            try
+            {
+                student.Photo = uploadedPhoto;
+
+                Database.Session.SaveOrUpdate(student);
+                Success("Profile picture upload was successful", true);
+                return RedirectToAction("index");
+            }
+            catch (Exception e)
+            {
+                Danger("Oops! something went wrong, we're sorry. Please try again later", true);
+                return RedirectToAction("index");
+            }
         }
 
         public ActionResult Welcome()

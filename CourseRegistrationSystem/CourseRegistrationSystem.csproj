@@ -221,6 +221,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Alerts.cs" />
+    <Compile Include="Infrastructure\FileSizeAttribute.cs" />
+    <Compile Include="Infrastructure\FileTypesAttribute.cs" />
     <Compile Include="Infrastructure\HtmlDropDownExtensions.cs" />
     <Compile Include="Infrastructure\RoleProvider.cs" />
     <Compile Include="Infrastructure\SelectedTabAttribute.cs" />

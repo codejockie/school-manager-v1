@@ -1,4 +1,5 @@
-﻿using CourseRegistrationSystem.Models;
+﻿using CourseRegistrationSystem.Infrastructure;
+using CourseRegistrationSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -202,7 +203,9 @@ namespace CourseRegistrationSystem.ViewModels
         [EnumDataType(typeof(Disability))]
         public Disability Disability { get; set; }
 
-        [Required, DataType(DataType.Upload)]
+        [Required]
+        [FileSize(150000)]
+        [FileTypes("jpg,jpeg")]
         public HttpPostedFileBase Photo { get; set; }
 
         [Required, EnumDataType(typeof(StudentType)), DisplayName("Student Type")]
