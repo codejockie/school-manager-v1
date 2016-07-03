@@ -22,7 +22,7 @@ namespace CourseRegistrationSystem.Models
         public virtual string Country { get; set; }
         public virtual string CourseOfStudy { get; set; }
         public virtual string Department { get; set; }
-        public virtual string Level { get; set; }
+        public virtual int Level { get; set; }
         public virtual string BloodGroup { get; set; }
         public virtual string Genotype { get; set; }
         public virtual string Disability { get; set; }

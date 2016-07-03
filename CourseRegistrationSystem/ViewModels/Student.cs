@@ -9,6 +9,11 @@ using System.Web;
 
 namespace CourseRegistrationSystem.ViewModels
 {
+    // A ViewModel is a representation of the model used to present information to the View
+    // Below I have five ViewModels, they are named using the Controller and then the Action name i.e.
+    // WelcomeIndex => ControllerName = Welcome Action/Method name = Index except for the last VM
+    // A model/ViewModel is represented by a class with Properties like below
+    // presents the students firstname and photo in the profile, and the Profile pix for uploading
     public class WelcomeIndex
     {
         public string FirstName { get; set; }
@@ -19,6 +24,8 @@ namespace CourseRegistrationSystem.ViewModels
         [FileTypes("jpg,jpeg")]
         public HttpPostedFileBase ProfilePic { get; set; }
     }
+
+    // presents the View when the user clicks Student Profile Details
     public class WelcomeBiodata
     {
         [Required, DisplayName("Firstname"), MaxLength(50)]
@@ -85,6 +92,7 @@ namespace CourseRegistrationSystem.ViewModels
         public string SponsorPhone { get; set; }
     }
 
+    // presents the View when the user clicks Change Password
     public class WelcomeChangePassword
     {
         public string Username { get; set; }
@@ -97,6 +105,7 @@ namespace CourseRegistrationSystem.ViewModels
         public string ConfirmPassword { get; set; }
     }
 
+    // presents the View for View Registration
     public class WelcomeViewRegistration
     {
         [Required, DisplayName("Firstname"), MaxLength(50)]
@@ -147,8 +156,8 @@ namespace CourseRegistrationSystem.ViewModels
         [Required, MaxLength(50)]
         public string Department { get; set; }
 
-        [Required, EnumDataType(typeof(Level))]
-        public string Level { get; set; }
+        [Required]
+        public int Level { get; set; }
 
         [Required]
         [FileSize(150000)]
@@ -157,9 +166,11 @@ namespace CourseRegistrationSystem.ViewModels
 
         public string StudentType { get; set; }
 
+        // passes the list of enroled courses to View Registration
         public List<EnrolledCourses> Enroll { get; set; }
     }
 
+    // presents Enroled courses view
     public class EnrolledCourses
     {
         public Course Courses { get; set; }

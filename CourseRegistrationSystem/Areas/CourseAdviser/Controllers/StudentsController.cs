@@ -34,23 +34,12 @@ namespace CourseRegistrationSystem.Areas.CourseAdviser.Controllers
 
             IQueryable<StudentsViewCourses> query;
 
-            string studentLevel = null;
-
-            switch (student.Level)
-            {
-                case "LevelOne": studentLevel = "100"; break;
-                case "LevelTwo": studentLevel = "200"; break;
-                case "LevelThree": studentLevel = "300"; break;
-                case "LevelFour": studentLevel = "400"; break;
-                case "LevelFive": studentLevel = "500"; break;
-            }
-
             if (DateTime.Now.Month < 3 || DateTime.Now.Month >= 10)
             {
                 query = from students in Database.Session.Query<Student>()
                         join enrolled in Database.Session.Query<Enrollment>() on students.Id equals enrolled.StudentId
                         join courses in Database.Session.Query<Course>() on enrolled.CourseId equals courses.CourseId
-                        where courses.Level == studentLevel && courses.Semester == "First"
+                        where courses.Level == student.Level && courses.Semester == "First"
                         select new StudentsViewCourses
                         {
                             Courses = courses,
@@ -64,7 +53,7 @@ namespace CourseRegistrationSystem.Areas.CourseAdviser.Controllers
                 query = from students in Database.Session.Query<Student>()
                         join enrolled in Database.Session.Query<Enrollment>() on students.Id equals enrolled.StudentId
                         join courses in Database.Session.Query<Course>() on enrolled.CourseId equals courses.CourseId
-                        where courses.Level == studentLevel && courses.Semester == "Second"
+                        where courses.Level == student.Level && courses.Semester == "Second"
                         select new StudentsViewCourses
                         {
                             Courses = courses,
@@ -82,17 +71,7 @@ namespace CourseRegistrationSystem.Areas.CourseAdviser.Controllers
         {
             var student = Database.Session.Load<Student>(id);
 
-            string studentLevel = null;
             string semester = null;
-
-            switch (student.Level)
-            {
-                case "LevelOne": studentLevel = "100"; break;
-                case "LevelTwo": studentLevel = "200"; break;
-                case "LevelThree": studentLevel = "300"; break;
-                case "LevelFour": studentLevel = "400"; break;
-                case "LevelFive": studentLevel = "500"; break;
-            }
 
             if (DateTime.Now.Month < 3 || DateTime.Now.Month >= 10)
                 semester = "First";
@@ -102,7 +81,7 @@ namespace CourseRegistrationSystem.Areas.CourseAdviser.Controllers
             var hqlUpdate = "update Enrollment set status = 'Approved' where student_id = :studentId and Level = :level and Semester = :semester";
             Database.Session.CreateQuery(hqlUpdate)
                 .SetParameter("studentId", id)
-                .SetString("level", studentLevel)
+                .SetParameter("level", student.Level)
                 .SetString("semester", semester)
                 .ExecuteUpdate();
 

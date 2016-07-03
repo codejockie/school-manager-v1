@@ -1,0 +1,14 @@
+﻿The various files in the Models folder represent their respective DB tables
+
+Course.cs => courses table
+Enrollment.cs => enrollment table
+Role.cs => roles table
+RoleUsers.cs => role_users table
+Student.cs => students table
+User.cs => users table
+
+Each file has two classes in them, the first class is for the tables and the second class is used
+to map the first class' properties to their respective table columns.
+In the First class of each file, the properties defined in them represent their columns in their respective tables.
+
+I've only explained the Course.cs file, but same logic applies to other files in the Models folder

@@ -173,6 +173,7 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Global.asax" />
     <Content Include="LICENSE.txt" />
+    <Content Include="Models\About Models.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Areas\Admin\Views\Courses\Index.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
@@ -278,7 +279,6 @@
     <Content Include="Areas\Admin\Views\Students\New.cshtml" />
     <Content Include="Views\Auth\AdminLogin.cshtml" />
     <Content Include="Views\Shared\_Alerts.cshtml" />
-    <Content Include="Areas\Admin\Views\Students\NewStudent.cshtml" />
     <Content Include="Views\Shared\_ProfileLayout.cshtml" />
     <Content Include="Views\Home\Rule.cshtml" />
     <Content Include="Views\Welcome\_Approved.cshtml" />
@@ -286,6 +286,8 @@
     <Content Include="Views\Welcome\ViewRegistration.cshtml" />
     <Content Include="Views\Welcome\ApprovedRegistration.cshtml" />
     <Content Include="Views\Welcome\PendingRegistration.cshtml" />
+    <Content Include="Views\Welcome\AddCourses.cshtml" />
+    <Content Include="Views\Welcome\EditorTemplates\AddCourseViewModel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

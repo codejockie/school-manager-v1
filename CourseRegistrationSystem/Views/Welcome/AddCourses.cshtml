@@ -1,0 +1,20 @@
+﻿@model CourseRegistrationSystem.ViewModels.AddCourseSelectionViewModel
+
+
+<div>
+    <table class="table table-condensed courses-table" id="extra-courses">
+        <thead>
+            <tr style="font-size: 12px;">
+                <th>Register</th>
+                <th>Course Code</th>
+                <th style="text-align: center;">Course Title</th>
+                <th>Unit</th>
+                <th>Course Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            @Html.EditorFor(m => m.Courses)
+        </tbody>
+    </table>
+    <br />
+</div>

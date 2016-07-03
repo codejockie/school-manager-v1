@@ -12,7 +12,7 @@ namespace CourseRegistrationSystem.Models
         public virtual int Id { get; set; }
         public virtual int CourseId { get; set; }
         public virtual int StudentId { get; set; }
-        public virtual string Level { get; set; }
+        public virtual int Level { get; set; }
         public virtual string Semester { get; set; }
         public virtual string Status { get; set; }
     }
@@ -23,7 +23,7 @@ namespace CourseRegistrationSystem.Models
         {
             Table("enrollment");
 
-            Id(x => x.Id, x => x.Generator(Generators.Identity));
+            Id(i => i.Id, x => x.Generator(Generators.Identity));
 
             Property(c => c.CourseId, c => 
             {

@@ -41,7 +41,7 @@ namespace CourseRegistrationSystem.Areas.Admin.Controllers
                 CourseCode = form.CourseCode,
                 CourseTitle = form.CourseTitle,
                 LecturerName = form.LecturerName,
-                Level = form.Level,
+                Level = int.Parse(form.Level),
                 Semester = form.Semester,
                 Credit = form.Credit,
                 Type = form.Type
@@ -62,7 +62,7 @@ namespace CourseRegistrationSystem.Areas.Admin.Controllers
                 CourseCode = course.CourseCode,
                 CourseTitle = course.CourseTitle,
                 LecturerName = course.LecturerName,
-                Level = course.Level,
+                Level = course.Level.ToString(),
                 Semester = course.Semester,
                 Credit = course.Credit,
                 Type = course.Type
@@ -85,7 +85,7 @@ namespace CourseRegistrationSystem.Areas.Admin.Controllers
             course.CourseCode = form.CourseCode;
             course.CourseTitle = form.CourseTitle;
             course.LecturerName = form.LecturerName;
-            course.Level = form.Level;
+            course.Level = int.Parse(form.Level);
             course.Semester = form.Semester;
             course.Credit = form.Credit;
             course.Type = form.Type;

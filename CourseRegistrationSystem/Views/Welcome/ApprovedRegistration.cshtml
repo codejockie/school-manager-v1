@@ -8,7 +8,7 @@
         totalUnit += int.Parse(item.Courses.Credit);
     }
 }
-<div class="col-md-8 col-md-offset-1" id="printRegistration">
+<div class="col-md-8 col-md-offset-1" id="printArea">
     <div class="schoolheading">
         <span class="pull-right">
             @{
@@ -168,22 +168,26 @@
         </tfoot>
     </table>
     <div id="name-sign">
-        <p>Academic Adviser's Name & Signature ____________________________________  Date:__________________</p>
-        <p>Head of Department's Name & Signature _________________________________  Date:__________________</p>
-        <p>Faculty Officer's Name & Signature _______________________________________  Date:__________________</p>
+        <p>Academic Adviser's Name & Signature _______________________________________________________  Date:__________________</p>
+        <p>Head of Department's Name & Signature _____________________________________________________  Date:__________________</p>
+        <p>Faculty Officer's Name & Signature ________________________________________________________  Date:__________________</p>
     </div>
 </div>
-<div class="col-md-8 col-md-offset-1">
-    <input class="btn btn-info" id="printBtn" type="button" value="Print" />
+<div class="col-md-8 col-md-offset-1 hidden-print">
+    <button class="btn btn-primary col-md-offset-4" id="printBtn" type="button">
+        <i class="glyphicon glyphicon-print"></i> Print
+    </button>
     <br />
     <hr />
 </div>
 <script>
-    
+    $('#printBtn').on("click", function () {
+        window.print();
+    });
 
     $.ajax({
         success: function () {
-            //CallPrint('printRegistration');
+            
         }
     })
 </script>

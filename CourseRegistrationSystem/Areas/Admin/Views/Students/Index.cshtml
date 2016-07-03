@@ -1,7 +1,7 @@
 ﻿@model CourseRegistrationSystem.Areas.Admin.ViewModels.StudentsIndex
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Students";
 }
 
 <h1>Students</h1>
@@ -31,16 +31,7 @@
                 <td>@student.Email</td>
                 <td class="text-uppercase">@student.State</td>
                 <td>@student.Department/@student.CourseOfStudy</td>
-                <td class="text-uppercase">
-                    @switch (student.Level)
-                    {
-                        case "LevelOne": <span> 100</span> break;
-                        case "LevelTwo": <span> 200</span> break;
-                        case "LevelThree": <span> 300</span> break;
-                        case "LevelFour": <span> 400</span> break;
-                        case "LevelFive": <span> 500</span> break;
-                    }
-                </td>
+                <td class="text-uppercase">@student.Level</td>
                 <td>
                     <div class="btn-group">
                         <a href="@Url.Action("delete", new { student.Id })" class="btn btn-xs btn-danger" data-post="Are you sure you want to delete @student.FirstName">

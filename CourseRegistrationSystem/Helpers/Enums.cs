@@ -2,6 +2,7 @@
 
 namespace CourseRegistrationSystem.Helpers
 {
+    // these are simply enums used for the dropdownlists in the student profile details
     public enum Gender
     {
         Female,
@@ -30,18 +31,18 @@ namespace CourseRegistrationSystem.Helpers
         Postgraduate
     }
 
-    public enum Level
+    public enum Level : short
     {
         [Display(Name = "100 Level")]
-        LevelOne,
+        FirstYear = 100,
         [Display(Name = "200 Level")]
-        LevelTwo,
+        SecondYear = 200,
         [Display(Name = "300 Level")]
-        LevelThree,
+        ThirdYear = 300,
         [Display(Name = "400 Level")]
-        LevelFour,
+        FourthYear = 400,
         [Display(Name = "500 Level")]
-        LevelFive
+        FifthYear = 500
     }
 
     public enum BloodGroup
@@ -89,7 +90,7 @@ namespace CourseRegistrationSystem.Helpers
         Tunisia,
         [Display(Name = "United Kingdom")]
         UnitedKingdom,
-        [Display(Name = "United States of America")]
+        [Display(Name = "United States")]
         USA,
         Vietnam,
         Yemen,

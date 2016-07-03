@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = ViewBag.Name + "'s " + "Registered Courses";
 
-    int i = 1;
     int totalUnit = 0;
     foreach (var item in Model)
     {
@@ -36,6 +35,8 @@
                 <td class="text-uppercase" id="status">@item.Status.Status</td>
             </tr>
         }
+    </tbody>
+    <tfoot>
         <tr>
             <td></td>
             <td class="text-uppercase"><strong>Total Units Registered till Date</strong></td>
@@ -44,7 +45,7 @@
             <td></td>
             <td></td>
         </tr>
-    </tbody>
+    </tfoot>
 </table>
 @using (Html.BeginForm("approve", "students", new { ViewBag.Id }, FormMethod.Post))
 {
@@ -64,6 +65,17 @@
         $("#status").each(function () {
             if ($(this).text() === "Approved") {
                 $("#btn-approve").prop("disabled", true);
+            }
+        });
+        $(function () {
+            //var $heading = $('h3').text();
+            var $rowItemCheck = $('div tbody');
+            var $tfoot = $('div tfoot');
+            if ($rowItemCheck.empty()) {
+                //var subHeading = $heading.substr(22, 14);
+                $('h3').text("@ViewBag.Name is yet to register for the current semester");
+                $tfoot.hide();
+                $('#btn-approve').hide();
             }
         });
     </script>

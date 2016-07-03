@@ -1,7 +1,8 @@
 ﻿@model CourseRegistrationSystem.Areas.CourseAdviser.ViewModels.StudentsIndex
 
-@{ 
+@{
     ViewBag.Title = "Students";
+    int i = 1;
 }
 
 <h1>Students</h1>
@@ -9,7 +10,7 @@
 <table class="table table-condensed table-striped">
     <thead>
         <tr>
-            <th>Student Id</th>
+            <th>Serial No</th>
             <th>Student Name</th>
             <th>Student Level</th>
             <th>Actions</th>
@@ -19,29 +20,18 @@
         @foreach (var student in Model.Students)
         {
             <tr>
-                <td>@student.Id</td>
+                <td>@(i++)</td>
                 <td><span class="text-uppercase">@student.FirstName @student.LastName @student.MiddleName</span></td>
+                <td>@student.Level</td>
                 <td>
-                    @{
-                        switch (student.Level)
-                        {
-                            case "LevelOne": <span class="text-uppercase"> 100 Level</span> break;
-                            case "LevelTwo": <span class="text-uppercase"> 200 Level</span> break;
-                            case "LevelThree": <span class="text-uppercase"> 300 Level</span> break;
-                            case "LevelFour": <span class="text-uppercase"> 400 Level</span> break;
-                            case "LevelFive": <span class="text-uppercase"> 500 Level</span> break;
-                        }
-                    }
+                    <div class="btn-group">
+                        <a href="@Url.Action("viewcourses", new { student.Id })" class="btn btn-xs btn-primary">
+                            <i class="glyphicon glyphicon-open"></i>
+                            View Registration
+                        </a>
+                    </div>
                 </td>
-                        <td>
-                            <div class="btn-group">
-                                <a href="@Url.Action("viewcourses", new { student.Id })" class="btn btn-xs btn-primary">
-                                    <i class="glyphicon glyphicon-open"></i>
-                                    View Registration
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
+            </tr>
         }
     </tbody>
 </table>

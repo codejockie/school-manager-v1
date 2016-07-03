@@ -1,5 +1,9 @@
 ﻿@model CourseRegistrationSystem.Areas.Admin.ViewModels.CoursesIndex
 
+@{
+    ViewBag.Title = "Courses";
+}
+
 <h1>Courses</h1>
 
 <div class="btn-toolbar">
@@ -9,7 +13,6 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Course Code</th>
             <th>Course Title</th>
             <th>Lecturer</th>
@@ -24,7 +27,6 @@
         @foreach (var course in Model.Courses)
         {
             <tr>
-                <td>@course.CourseId</td>
                 <td>@course.CourseCode</td>
                 <td>@course.CourseTitle</td>
                 <td>@course.LecturerName</td>

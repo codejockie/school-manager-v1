@@ -12,21 +12,6 @@ namespace CourseRegistrationSystem.Areas.Admin.ViewModels
     {
         public IEnumerable<Student> Students { get; set; }
     }
-    public class StudentsNewStudent
-    {
-        [Required, Display(Name = "Matric Number"), MaxLength(11)]
-        public string Username { get; set; }
-
-        [Required, DataType(DataType.Password)]
-        public string Password { get; set; }
-
-        [Required, DisplayName("Confirm Password")]
-        [DataType(DataType.Password), Compare("Password", ErrorMessage = "Password and Confirm Password Must Match")]
-        public string ConfirmPassword { get; set; }
-
-        [Required, MaxLength(256), DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
-    }
 
     public class StudentsNew
     {
@@ -89,7 +74,6 @@ namespace CourseRegistrationSystem.Areas.Admin.ViewModels
 
         [Required]
         public Genotype Genotype { get; set; }
-
 
         public Disability Disability { get; set; }
 

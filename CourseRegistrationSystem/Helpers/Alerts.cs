@@ -5,6 +5,8 @@ using System.Web;
 
 namespace CourseRegistrationSystem.Helpers
 {
+    // here is the Alert class used by the BaseController
+    // it defines a constant field and three properties
     public class Alert
     {
         public const string TempDataKey = "TempDataAlerts";
@@ -14,6 +16,7 @@ namespace CourseRegistrationSystem.Helpers
         public bool Dismissable { get; set; }
     }
 
+    // this class define constant values for the various alert styles
     public static class AlertStyles
     {
         public const string Success = "success";

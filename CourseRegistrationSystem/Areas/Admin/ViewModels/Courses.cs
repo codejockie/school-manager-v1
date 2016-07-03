@@ -25,7 +25,7 @@ namespace CourseRegistrationSystem.Areas.Admin.ViewModels
         [MaxLength(128), DisplayName("Lecturer")]
         public string LecturerName { get; set; }
 
-        [Required, MaxLength(10)]
+        [Required, MaxLength(3)]
         public string Level { get; set; }
 
         [Required, MaxLength(7)]
@@ -49,7 +49,7 @@ namespace CourseRegistrationSystem.Areas.Admin.ViewModels
         [MaxLength(128), DisplayName("Lecturer")]
         public string LecturerName { get; set; }
 
-        [Required, MaxLength(10)]
+        [Required, MaxLength(3)]
         public string Level { get; set; }
 
         [Required, MaxLength(7)]

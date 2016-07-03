@@ -59,16 +59,7 @@
             <tr>
                 <td>Level: </td>
                 <td class="d-text text-uppercase">
-                    @{
-                        switch (Model.Level)
-                        {
-                            case "LevelOne": <text> 100 Level</text> break;
-                            case "LevelTwo": <text> 200 Level</text> break;
-                            case "LevelThree": <text> 300 Level</text> break;
-                            case "LevelFour": <text> 400 Level</text> break;
-                            case "LevelFive": <text> 500 Level</text> break;
-                        }
-                    }
+                    @Model.Level
                 </td>
             </tr>
         </tbody>
@@ -78,13 +69,13 @@
         <div class="registration-info">
             <p>Please click on the "<span style="color: red; font-weight: bold">Check Boxes</span>" beside each course to select a course or courses...</p>
             <p><span style="color: red; font-weight: bold">NOTE:</span> You cannot delete courses that have been aproved by your course advisor</p>
-            <p>Click here to @Html.ActionLink("Add/Borrow Courses", "BorrowCourses", null, new { target = "_blank" })</p>
+            <p>Click here to @Html.ActionLink("Add/Borrow Courses", "addcourses", null, new { id = "add-courses" })</p>
         </div>
 
         <div>
             @using (Html.BeginForm())
             {
-                <table class="table table-condensed courses-table">
+                <table class="table table-condensed courses-table" id="courses">
                     <thead>
                         <tr style="font-size: 12px;">
                             <th>Register</th>
@@ -94,7 +85,7 @@
                             <th>Course Type</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="courses">
                         @Html.EditorFor(m => m.Courses)
                     </tbody>
                     <tfoot>
@@ -108,6 +99,7 @@
                     </tfoot>
                 </table>
                 <br />
+                <div id="dialog-add-courses" style="display: none"></div>
 
                 <div>
                     <input type="submit" value="Register" class="btn btn-primary" id="btn-register" />
@@ -117,6 +109,56 @@
                 <br />
                 <hr />
                 <script>
+                    function addCourses() {
+                        var $id = '<input type="checkbox" name="mycheckbox" id="course-id" />',
+                            $code = $('#course-code').text(),
+                            $title = $('#course-title').text(),
+                            $unit = $('#course-unit').text(),
+                            $type = $('#course-type').text();
+
+                        $('.add-check:checked').each(function () {
+                            $('#courses tbody').append('<tr class="text-uppercase"><td>' +
+                                    $id + "</td>" + "<td>" + $code + "</td>" +
+                                    "<td>" + $title + "</td>" + '<td style="text-align: center;">' + $unit + "</td>" +
+                                    "<td>" + $type + "</td></tr>")
+                        });
+
+                        $("#dialog-add-courses").dialog("close");
+                    }
+                    
+                    $(function () {
+                        $.ajaxSetup({ cache: false });
+
+                        $("#add-courses").on("click", function (e) {
+                            e.preventDefault();
+                            var url = $(this).attr('href');
+
+                            $("#dialog-add-courses").dialog({
+                                title: 'Add/Borrow Courses',
+                                autoOpen: false,
+                                resizable: false,
+                                width: 900,
+                                show: { effect: 'drop', direction: "up" },
+                                modal: true,
+                                draggable: true,
+                                position: { my: "center", at: "center", of: window },
+                                open: function (event, ui) {
+                                    $(".ui-dialog-titlebar-close").hide();
+                                    $(this).load(url + " div");
+                                },
+                                buttons: {
+                                    "Add": addCourses,
+                                    Cancel: function () {
+                                        $(this).dialog("close");
+                                    }
+                                },
+                            });
+
+                            $("#dialog-add-courses").dialog("open");
+                            return false;
+                        });
+                    });
+
                     $("#chkSelectAll").bind("change", function () {
                         $(".chkSelect").prop("checked", $(this).prop("checked"));
                     });
@@ -158,8 +200,7 @@
                     })
 
                     $(".courseType:contains(Elective)").each(function () {
-                        $(this).addClass("glyphicon glyphicon-info")
-                            .attr({
+                        $(this).attr({
                                 'data-container': 'body',
                                 "data-toggle": "popover",
                                 "data-placement": "right",
