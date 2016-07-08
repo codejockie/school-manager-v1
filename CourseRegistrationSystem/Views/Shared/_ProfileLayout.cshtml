@@ -1,0 +1,27 @@
+﻿@using System.Web.Optimization
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - Sands University</title>
+
+    @Styles.Render("~/styles")
+    <link href="~/Content/themes/base/all.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid">
+        @{ Html.RenderPartial("_Alerts"); }
+        <br />
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/scripts")
+    @RenderSection("Scripts", false)
+</body>
+</html>

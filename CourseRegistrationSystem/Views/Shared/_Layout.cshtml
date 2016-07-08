@@ -17,7 +17,7 @@ if (tabName == ViewBag.SelectedTab)
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title - CourseRegistrationSystem</title>
+    <title>@ViewBag.Title - Sands University</title>
 
     @Styles.Render("~/styles")
     <link href="~/Content/themes/base/all.css" rel="stylesheet" />
@@ -33,13 +33,12 @@ if (tabName == ViewBag.SelectedTab)
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="@Url.RouteUrl("home")">Online Course Registration System</a>
+                <a class="navbar-brand @SelectedTabClass("home")" href="@Url.RouteUrl("home")">Sands University</a>
             </div>
 
             <div class="collapse navbar-collapse navbar-right" id="bs-navbar-collapse">
                 <!--navbar-right takes nav right-->
                 <ul class="nav navbar-nav">
-                    @*<li class="@SelectedTabClass("home")"><a href="@Url.RouteUrl("home")">Home</a></li>*@
 
                     @if (User.Identity.IsAuthenticated)
                     {
@@ -51,8 +50,7 @@ if (tabName == ViewBag.SelectedTab)
 
                         if (User.IsInRole("course adviser"))
                         {
-                            <li> @Html.ActionLink("Course Adviser", "index", new { controller = "home", area = "courseadviser" })</li>
-                                <li><a href="#">Welcome back, @User.Identity.Name.ToUpper()</a></li>
+                            <li><a href="@Url.Action("index", new { controller = "students", area = "courseadviser" })">Welcome back, @User.Identity.Name.ToUpper()</a></li>
                                 <li><a href="@Url.RouteUrl("adminlogout")">Logout</a></li>
                         }
                     }
@@ -74,14 +72,16 @@ if (tabName == ViewBag.SelectedTab)
         <footer>
             @if (!User.Identity.IsAuthenticated)
             {
-                <div class="col-md-5 pull-right">
-                    <a href="#">&copy; Ozokolo Sandra @DateTime.UtcNow.Year <img class="img-responsive img-circle" id="img-footer" src="~/Content/Images/sandie.jpg" /></a>
-                </div>
-                <div class="col-md-7">
-                    <ul class="footer-nav">
-                        <li>@Html.RouteLink("Admin", "adminlogin")</li>
-                        <li>@Html.RouteLink("Course Adviser", "adminlogin")</li>
-                    </ul>
+                <div class="row">
+                    <div class="col-md-5 pull-right">
+                        <a href="#">&copy; Ozokolo Sandra @DateTime.UtcNow.Year <img class="img-responsive img-circle" id="img-footer" src="~/Content/Images/sandie.jpg" /></a>
+                    </div>
+                    <div class="col-md-7">
+                        <ul class="footer-nav">
+                            <li>@Html.RouteLink("Admin", "adminlogin")</li>
+                            <li>@Html.RouteLink("Course Adviser", "adminlogin")</li>
+                        </ul>
+                    </div>
                 </div>
             }
         </footer>

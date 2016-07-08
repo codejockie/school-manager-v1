@@ -1,0 +1,56 @@
+﻿@model IEnumerable<CourseRegistrationSystem.Areas.CourseAdviser.ViewModels.StudentsViewCourses>
+
+@{
+    ViewBag.Title = "View Courses";
+}
+
+<h2>Registered Courses for @ViewBag.Name</h2>
+
+<table class="table table-condensed table-striped">
+    <thead>
+        <tr>
+            <th>Course Code</th>
+            <th>Course Title</th>
+            <th>Unit</th>
+            <th>Level</th>
+            <th>Semester</th>
+            <th>Approval Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Courses.CourseCode</td>
+                <td class="text-uppercase">@item.Courses.CourseTitle</td>
+                <td>@item.Courses.Credit</td>
+                <td>@item.Courses.Level</td>
+                <td class="text-uppercase">@item.Courses.Semester</td>
+                <td class="text-uppercase" id="status">@item.Status.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@using (Html.BeginForm("approve", "students", new { ViewBag.Id }, FormMethod.Post))
+{
+    <div class="container">
+        <button type="submit" class="btn btn-success" id="btn-approve">
+            <span class="glyphicon glyphicon-ok"></span> Approve
+        </button>
+        <a href="@Url.Action("index")" class="btn btn-link">
+            <i class="glyphicon glyphicon-arrow-left"></i>
+            go back
+        </a>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        $("#status").each(function () {
+            if ($(this).text() === "Approved") {
+                $("#btn-approve").prop("disabled", true);
+            }
+        });
+    </script>
+    }
+

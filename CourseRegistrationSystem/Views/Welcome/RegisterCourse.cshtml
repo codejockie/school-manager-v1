@@ -33,7 +33,7 @@
                 <td class="d-title">Semester: </td>
                 <td class="d-text">
                     @{
-                        if (DateTime.Now.Month <= 4 || DateTime.Now.Month >= 10)
+                        if (DateTime.Now.Month < 3 || DateTime.Now.Month >= 10)
                         {
                             @: <span class="text-uppercase">First Semester</span>
                         }
@@ -74,30 +74,31 @@
         </tbody>
     </table>
     <hr />
-    <div class="registration-info">
-        <p>Please click on the "<span style="color: red; font-weight: bold">Check Boxes</span>" beside each course to select a course or courses...</p>
-        <p><span style="color: red; font-weight: bold">NOTE:</span> You cannot delete courses that have been aproved by your course advisor</p>
-        <p>Click here to @Html.ActionLink("Add/Borrow Courses", "BorrowCourses", null, new { target = "_blank" })</p>
-    </div>
+    <div class="registration">
+        <div class="registration-info">
+            <p>Please click on the "<span style="color: red; font-weight: bold">Check Boxes</span>" beside each course to select a course or courses...</p>
+            <p><span style="color: red; font-weight: bold">NOTE:</span> You cannot delete courses that have been aproved by your course advisor</p>
+            <p>Click here to @Html.ActionLink("Add/Borrow Courses", "BorrowCourses", null, new { target = "_blank" })</p>
+        </div>
 
-    <div>
-        @using (Html.BeginForm())
-        {
-            <table class="table table-condensed courses-table">
-                <thead>
-                    <tr style="font-size: 12px;">
-                        <th>Register</th>
-                        <th>Course Code</th>
-                        <th style="text-align: center;">Course Title</th>
-                        <th>Unit</th>
-                        <th>Course Type</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @Html.EditorFor(m => m.Courses)
-                </tbody>
-            </table>
-            <br />
+        <div>
+            @using (Html.BeginForm())
+            {
+                <table class="table table-condensed courses-table">
+                    <thead>
+                        <tr style="font-size: 12px;">
+                            <th>Register</th>
+                            <th>Course Code</th>
+                            <th style="text-align: center;">Course Title</th>
+                            <th>Unit</th>
+                            <th>Course Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @Html.EditorFor(m => m.Courses)
+                    </tbody>
+                </table>
+                <br />
 
                 <div>
                     <input type="submit" value="Register Course" class="btn btn-primary" id="btn-register" />
@@ -116,7 +117,9 @@
                     });
 
                     $(".courseType:contains(Elective)").each(function () {
-                        $(this).addClass("btn btn-primary").css("color", "white")
+                        $(this).addClass("btn btn-xs btn-info")
+                            .css("color", "#007196")
+                            .css("font-size", "10px")
                             .attr({
                                 'data-container': 'body',
                                 "data-toggle": "popover",
@@ -126,6 +129,29 @@
                                 "title": ""
                             });
                     });
+
+                    $(".course-title").each(function () {
+                                $(this).attr({
+                                    'data-container': 'body',
+                                    "data-toggle": "tooltip",
+                                    "data-placement": "top",
+                                    "data-content": "",
+                                    "data-original-title": $(this).text(),
+                                    "title": ""
+                                });
+                    });
+
+                    function tool_tip() {
+                        $('[data-toggle="tooltip"]').tooltip()
+                    }
+
+                    tool_tip();  // Call in document ready for elements already present
+
+                    $.ajax({
+                        success: function (data) {
+                            tool_tip();  // Call function again for AJAX loaded content
+                        }
+                    })
 
                     function pop_over() {
                         $('[data-toggle="popover"]').popover()
@@ -139,21 +165,7 @@
                         }
                     })
                 </script>
-        }
+            }
+        </div>
     </div>
 </div>
-
-@section Scripts {
-
-    <script>
-        $(function () {
-            $("#courseType").hover(
-                function () {
-
-                },
-                function () {
-
-                });
-        });
-    </script>
-}

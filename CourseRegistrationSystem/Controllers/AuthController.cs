@@ -53,7 +53,7 @@ namespace CourseRegistrationSystem.Controllers
         }
 
         [HttpPost]
-        public ActionResult AdminLogin(AuthLogin form, string returnUrl)
+        public ActionResult AdminLogin(AuthAdminLogin form, string returnUrl)
         {
             var user = Database.Session.Query<User>().FirstOrDefault(u => u.Username == form.Username);
             if (user == null)
@@ -70,6 +70,10 @@ namespace CourseRegistrationSystem.Controllers
             if (!string.IsNullOrWhiteSpace(returnUrl))
                 return Redirect(returnUrl);
 
+            if (User.Identity.IsAuthenticated && User.IsInRole("courseadviser"))
+            {
+                return RedirectToAction("index", new { controller = "students", area = "courseadviser" });
+            }
             return RedirectToAction("index", new { controller = "users", area = "admin" });
         }
 
@@ -122,8 +126,6 @@ namespace CourseRegistrationSystem.Controllers
             form.Photo.InputStream.Read(uploadedPhoto, 0, uploadedPhoto.Length);
             TempData["uploadedphoto"] = uploadedPhoto;
 
-
-            //int lastStudentId = Database.Session.Query<Student>().Max(x => x.Id);
             return RedirectToAction("newstudent", "auth");
         }
 
@@ -185,10 +187,17 @@ namespace CourseRegistrationSystem.Controllers
                 user.Username = form.Username;
                 user.SetPassword(form.Password);
 
-                //Database.Session.Save(student);
-                //int lastStudentId = Database.Session.Query<Student>().Max(x => x.Id);
-                //Database.Session.Save(user);
-                //int lastUserId = Database.Session.Query<User>().Max(x => x.Id);
+                Database.Session.Save(student);
+                Database.Session.Save(user);
+                int lastUserId = Database.Session.Query<User>().Max(x => x.Id);
+
+                var roleUser = new RoleUsers
+                {
+                    UserId = lastUserId,
+                    RoleId = 3
+                };
+                Database.Session.Save(roleUser);
+
                 Success("Registration was Successful!", true);
             }
             catch (Exception)

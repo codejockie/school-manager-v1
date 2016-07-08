@@ -184,7 +184,7 @@ namespace CourseRegistrationSystem.Controllers
                 case "LevelFive": studentLevel = "500"; break;
             }
 
-            if (DateTime.Now.Month <= 4 || DateTime.Now.Month >= 10)
+            if (DateTime.Now.Month < 3 || DateTime.Now.Month >= 10)
             {
                 courses = Database.Session.Query<Course>()
                     .Where(c => c.Level == studentLevel && c.Semester == "First").ToList();
@@ -241,7 +241,9 @@ namespace CourseRegistrationSystem.Controllers
                     {
                         CourseId = course.CourseId,
                         StudentId = student.Id,
-                        Status = "Pending".ToUpper()
+                        Level = course.Level,
+                        Semester = course.Semester,
+                        Status = "Pending"
                     };
                     Database.Session.Save(enrollment);
                 }
@@ -253,6 +255,11 @@ namespace CourseRegistrationSystem.Controllers
                 Danger("Oops! We are sorry, an error occurred while processing your request.\nPlease try again later");
                 return RedirectToAction("index");
             }
+        }
+
+        public ActionResult Rule()
+        {
+            return View();
         }
     }
 }

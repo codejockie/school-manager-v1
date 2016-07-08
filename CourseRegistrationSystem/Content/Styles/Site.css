@@ -18,15 +18,12 @@
     border: 1px solid gray;
 }
 .courses-table td {
-    border-color: orange;
-    color: orange;
+    color: #007196;
     font-size: 13px;
 }
-/*.crs-font {
+.rule {
     font-weight: bold;
-    font-size: 14px;
-    font-family: 'Times New Roman', Arial, serif, Verdana;
-}*/
+}
 #btn-register {
     position: relative;
     font-family: 'Times New Roman';
@@ -67,7 +64,7 @@ div.registration-info p {
     color: #b2b2b2;
 }
 .footer-nav a:hover {
-    color: #fff;
+    color: #007196;
     text-decoration: none;
 }
 #img-footer {
@@ -79,4 +76,7 @@ div.registration-info p {
 #profile-img {
     width: 170px;
     height: 170px;
+}
+#rule p {
+    text-align: justify;
 }

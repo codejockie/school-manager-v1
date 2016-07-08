@@ -4,6 +4,6 @@
     var id = Database.Session.Query<Student>().Where(s => s.RegistrationNumber == User.Identity.Name).Select(s => s.Id).First();
     var student = Database.Session.Load<Student>(id);
 }
-<div class="col-md-6 col-md-offset-3">
-    <h4>Welcome @student.FirstName @student.LastName @student.MiddleName to your profile page</h4>
+<div class="col-md-8 col-md-offset-1">
+    <h4>Welcome @student.FirstName @student.LastName @student.MiddleName, to your personal profile page</h4>
 </div>

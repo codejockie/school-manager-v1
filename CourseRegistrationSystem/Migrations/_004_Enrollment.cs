@@ -20,6 +20,8 @@ namespace CourseRegistrationSystem.Migrations
                 .WithColumn("id").AsInt32().Identity().PrimaryKey()
                 .WithColumn("course_id").AsInt32().ForeignKey("courses", "course_id").OnDeleteOrUpdate(System.Data.Rule.None)
                 .WithColumn("student_id").AsInt32().ForeignKey("students", "id").OnDeleteOrUpdate(System.Data.Rule.None)
+                .WithColumn("level").AsString(10).NotNullable()
+                .WithColumn("semester").AsString(10).NotNullable()
                 .WithColumn("status").AsString(8).NotNullable();
         }
     }

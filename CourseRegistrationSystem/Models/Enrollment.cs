@@ -12,6 +12,8 @@ namespace CourseRegistrationSystem.Models
         public virtual int Id { get; set; }
         public virtual int CourseId { get; set; }
         public virtual int StudentId { get; set; }
+        public virtual string Level { get; set; }
+        public virtual string Semester { get; set; }
         public virtual string Status { get; set; }
     }
 
@@ -33,6 +35,8 @@ namespace CourseRegistrationSystem.Models
                 s.Column("student_id");
                 s.NotNullable(true);
             });
+            Property(l => l.Level, l => l.NotNullable(true));
+            Property(s => s.Semester, s => s.NotNullable(true));
             Property(s => s.Status, s => s.NotNullable(true));
         }
     }
