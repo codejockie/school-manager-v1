@@ -208,6 +208,26 @@ namespace CourseRegistrationSystem.Controllers
                 });
             }
 
+            string semester = null;
+            if (DateTime.Now.Month < 3 || DateTime.Now.Month >= 10)
+                semester = "First";
+            else
+                semester = "Second";
+
+            var registeredApproved = Database.Session.Query<Enrollment>().Where(x => x.StudentId == student.Id && x.Level == studentLevel && x.Semester == semester)
+                .Any(x => x.Status == "Approved");
+
+            var registeredPending = Database.Session.Query<Enrollment>().Where(x => x.StudentId == student.Id && x.Level == studentLevel && x.Semester == semester)
+                .Any(x => x.Status == "Pending");
+
+            if (registeredApproved)
+            {
+                return PartialView("_Approved");
+            }
+            else if (registeredPending)
+            {
+                return PartialView("_Pending");
+            }
             return PartialView("RegisterCourse", model);
         }
 
@@ -260,6 +280,94 @@ namespace CourseRegistrationSystem.Controllers
         public ActionResult Rule()
         {
             return View();
+        }
+
+        public ActionResult ViewRegistration()
+        {
+            var model = new WelcomeViewRegistration();
+
+            var id = Database.Session.Query<Student>().Where(s => s.RegistrationNumber == User.Identity.Name).Select(s => s.Id).First();
+            var student = Database.Session.Load<Student>(id);
+
+            if (student == null)
+                return HttpNotFound();
+
+            IQueryable<EnrolledCourses> query;
+
+            string studentLevel = null;
+
+            switch (student.Level)
+            {
+                case "LevelOne": studentLevel = "100"; break;
+                case "LevelTwo": studentLevel = "200"; break;
+                case "LevelThree": studentLevel = "300"; break;
+                case "LevelFour": studentLevel = "400"; break;
+                case "LevelFive": studentLevel = "500"; break;
+            }
+
+            model.FirstName = student.FirstName;
+            model.LastName = student.LastName;
+            model.MiddleName = student.MiddleName;
+            model.RegistrationNumber = student.RegistrationNumber;
+            model.Department = student.Department;
+            model.Level = studentLevel;
+            model.Address = student.Address;
+            model.Email = student.Email;
+            model.DateOfBirth = student.DateOfBirth.ToShortDateString();
+            model.Department = student.Department;
+            model.CourseOfStudy = student.CourseOfStudy;
+            model.Gender = student.Gender;
+            model.Hometown = student.Hometown;
+            model.LGA = student.LGA;
+            model.PhoneNumber = student.PhoneNumber;
+            model.Photo = student.Photo;
+            model.SponsorName = student.SponsorName;
+            model.SponsorPhone = student.SponsorPhone;
+            model.State = student.State;
+            model.StudentType = student.StudentType;
+
+            if (DateTime.Now.Month < 3 || DateTime.Now.Month >= 10)
+            {
+                query = from students in Database.Session.Query<Student>()
+                        join enrolled in Database.Session.Query<Enrollment>() on students.Id equals enrolled.StudentId
+                        join courses in Database.Session.Query<Course>() on enrolled.CourseId equals courses.CourseId
+                        where courses.Level == studentLevel && courses.Semester == "First"
+                        select new EnrolledCourses
+                        {
+                            Courses = courses,
+                            Enrolled = enrolled
+                        };
+            }
+            else
+            {
+                query = from students in Database.Session.Query<Student>()
+                        join enrolled in Database.Session.Query<Enrollment>() on students.Id equals enrolled.StudentId
+                        join courses in Database.Session.Query<Course>() on enrolled.CourseId equals courses.CourseId
+                        where courses.Level == studentLevel && courses.Semester == "Second"
+                        select new EnrolledCourses
+                        {
+                            Courses = courses,
+                            Enrolled = enrolled
+                        };
+            }
+
+            model.Enroll = query.ToList();
+
+            string semester = null;
+            if (DateTime.Now.Month < 3 || DateTime.Now.Month >= 10)
+                semester = "First";
+            else
+                semester = "Second";
+
+            var registeredApproved = Database.Session.Query<Enrollment>().Where(x => x.StudentId == student.Id && x.Level == studentLevel && x.Semester == semester)
+                .Any(x => x.Status == "Approved");
+
+            if (registeredApproved)
+            {
+                return PartialView("ApprovedRegistration", model);
+            }
+
+            return PartialView(model);
         }
     }
 }

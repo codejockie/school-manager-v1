@@ -2,7 +2,7 @@
 
 @{
     Layout = "~/Views/Shared/_ProfileLayout.cshtml";
-    ViewBag.Title = "Portal";
+    ViewBag.Title = ".:: Portal Manager® ::.";
 }
 
 <div class="row">
@@ -23,7 +23,7 @@
                             <div>
                                 @Html.TextBoxFor(x => x.ProfilePic, new { type = "file" })
                                 <p class="help-block">Image must be &lt;= 150KB. Supported file types: jpg, jpeg </p>
-                                <input type="submit" value="Upload" class="btn btn-default" />
+                                <input type="submit" value="Upload" class="btn btn-sm btn-default" />
                             </div>
                         </fieldset>
                     }
@@ -64,7 +64,7 @@
                 <ul>
                     <li>@Ajax.ActionLink("Registration rule", "rule", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "partials", InsertionMode = InsertionMode.Replace })</li>
                     <li>@Ajax.ActionLink("Register Courses", "registercourse", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "partials", InsertionMode = InsertionMode.Replace })</li>
-                    <li>@Ajax.ActionLink("View Registration", "", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "partials", InsertionMode = InsertionMode.Replace })</li>
+                    <li>@Ajax.ActionLink("View Registration", "viewregistration", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "partials", InsertionMode = InsertionMode.Replace })</li>
                 </ul>
             </div>
             <h3>Message</h3>
@@ -83,6 +83,7 @@
         </div>
 
     </div>
+    <br />
     <div class="col-md-9 container" id="partials">
         <div>
             @{ Html.RenderPartial("_Welcome"); }

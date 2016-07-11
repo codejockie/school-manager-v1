@@ -232,6 +232,7 @@
     <Compile Include="Infrastructure\RoleProvider.cs" />
     <Compile Include="Infrastructure\SelectedTabAttribute.cs" />
     <Compile Include="Infrastructure\TransactionFilter.cs" />
+    <Compile Include="Migrations\_005_Messages.cs" />
     <Compile Include="Migrations\_001_UsersAndRoles.cs" />
     <Compile Include="Migrations\_002_Courses.cs" />
     <Compile Include="Migrations\_004_Enrollment.cs" />
@@ -276,6 +277,10 @@
     <Content Include="Views\Auth\NewStudent.cshtml" />
     <Content Include="Views\Shared\_ProfileLayout.cshtml" />
     <Content Include="Views\Welcome\Rule.cshtml" />
+    <Content Include="Views\Welcome\_Approved.cshtml" />
+    <Content Include="Views\Welcome\_Pending.cshtml" />
+    <Content Include="Views\Welcome\ViewRegistration.cshtml" />
+    <Content Include="Views\Welcome\ApprovedRegistration.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

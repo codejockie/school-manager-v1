@@ -80,3 +80,41 @@ div.registration-info p {
 #rule p {
     text-align: justify;
 }
+.vdetails-table {
+    font-family: 'Times New Roman', Times, serif;
+}
+.vdetails-table td {
+    padding: 0px 10px 0px 0px;
+    line-height: 1.8em;
+    text-wrap: none;
+}
+#vr-img {
+    width: 100px;
+    height: 100px;
+}
+div.schoolheading p {
+    text-align: center;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: bolder;
+    line-height: 10px;
+}
+
+.vrtable-caption {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: medium;
+    font-weight: 700;
+    text-align: center;
+}
+
+#rcthead {
+    font-size: 10px;
+}
+
+#rctbody {
+    font-size: 11px;
+    text-align: center;
+}
+
+#name-sign p {
+    font-size: 12px;
+}

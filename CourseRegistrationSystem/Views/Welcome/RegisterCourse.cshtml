@@ -14,11 +14,11 @@
                     @{
                         if (DateTime.Now.Month >= 10)
                         {
-                            @: <span class="text-uppercase">@DateTime.Now.Year/@(DateTime.Now.Year + 1)</span>
+                            @: <span>@DateTime.Now.Year/@(DateTime.Now.Year + 1)</span>
                         }
                         else
                         {
-                            @: <span class="text-uppercase">@(DateTime.Now.Year - 1)/@DateTime.Now.Year</span>
+                            @: <span>@(DateTime.Now.Year - 1)/@DateTime.Now.Year</span>
                         }
                     }
                 </td>

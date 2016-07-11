@@ -1,0 +1,166 @@
+﻿@model CourseRegistrationSystem.ViewModels.WelcomeViewRegistration
+
+@{
+    int i = 1;
+    int totalUnit = 0;
+    foreach (var item in Model.Enroll)
+    {
+        totalUnit += int.Parse(item.Courses.Credit);
+    }
+}
+<div class="col-md-8 col-md-offset-1">
+    <div class="schoolheading">
+        <span class="pull-right">
+            @{
+                byte[] photo = Model.Photo;
+
+                if (photo != null)
+                {
+                    <img src="data:image/jpg;base64,@Convert.ToBase64String(photo, Base64FormattingOptions.None)" alt="@Model.FirstName Picture" class="img-responsive img-rounded" id="vr-img" />
+                }
+            }
+        </span>
+
+        <p>SANDS UNIVERSITY</p>
+        <p>OFFICE OF THE REGISTRAR</p>
+        <p>COURSE REGISTRATION FORM</p>
+        <p>
+            SESSION :
+            @if (DateTime.Now.Month >= 10)
+            {
+                @: <span>@DateTime.Now.Year/@(DateTime.Now.Year + 1)</span>
+            }
+            else
+            {
+                @: <span>@(DateTime.Now.Year - 1)/@DateTime.Now.Year</span>
+            }
+        </p>
+    </div>
+
+    <table class="vdetails-table">
+        <tbody>
+            <tr>
+                <td>Matric No:</td>
+                <td>@Model.RegistrationNumber</td>
+                <td>Surname:</td>
+                <td>@Model.LastName</td>
+                <td>Firstname:</td>
+                <td>@Model.FirstName</td>
+                <td>Midname:</td>
+                <td>@Model.MiddleName</td>
+            </tr>
+            <tr>
+                <td>Birth Date:</td>
+                <td>@Model.DateOfBirth</td>
+                <td>Sex:</td>
+                <td>@Model.Gender</td>
+                <td>M Status:</td>
+                <td></td>
+                <td>Religion:</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Phone:</td>
+                <td>@Model.PhoneNumber</td>
+                <td>Level:</td>
+                <td>@Model.Level</td>
+                <td>Entry Year:</td>
+                <td>
+                    @Model.RegistrationNumber.Substring(0, 4)
+                </td>
+                <td>Programme:</td>
+                <td>
+                    @if (Model.StudentType == "Undergraduate")
+                    {
+                        @: B.Sc.
+                    }
+                    else
+                    {
+                        @: PGD.
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>Faculty:</td>
+                <td>Physical Sciences</td>
+                <td>State:</td>
+                <td>@Model.State</td>
+                <td>LGA:</td>
+                <td>@Model.LGA</td>
+                <td>Hometown:</td>
+                <td>@Model.Hometown</td>
+            </tr>
+            <tr>
+                <td>Department:</td>
+                <td>@Model.Department</td>
+                <td>Course:</td>
+                <td>@Model.CourseOfStudy</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>@Model.Email</td>
+                <td>Address:</td>
+                <td colspan="2">@Model.Address</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Sponsor Name:</td>
+                <td>@Model.SponsorName</td>
+                <td></td>
+                <td>Sponsor Phone:</td>
+                <td>@Model.SponsorPhone</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <hr />
+
+    <h4 class="vrtable-caption">REGISTERED COURSES</h4>
+
+    <table class="table table-condensed">
+        <thead>
+            <tr class="text-uppercase" id="rcthead">
+                <th>SN</th>
+                <th>Session</th>
+                <th style="text-align: center;">Course Code</th>
+                <th style="text-align: center;">Course Title</th>
+                <th>Semester</th>
+                <th>Unit</th>
+                <th>Submitted</th>
+                <th>Approved</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Enroll)
+            {
+                <tr id="rctbody">
+                    <td>@(i++)</td>
+                    <td>@item.Session.ToString()</td>
+                    <td>@item.Courses.CourseCode</td>
+                    <td class="text-uppercase">@item.Courses.CourseTitle</td>
+                    <td class="text-uppercase">@item.Courses.Semester</td>
+                    <td>@item.Courses.Credit</td>
+                    <td><i class="glyphicon glyphicon-ok" style="color: green; font-size:medium;"></i></td>
+                    <td><i class="glyphicon glyphicon-remove" style="color: red; font-size:medium;"></i></td>
+                </tr>
+            }
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-uppercase">Total Units Registered till Date</td>
+                <td></td>
+                <td style="text-align: center;">@totalUnit</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -143,10 +143,88 @@ namespace CourseRegistrationSystem.ViewModels
         public string ConfirmPassword { get; set; }
     }
 
-    public class WelcomePreRegistration
+    public class WelcomeViewRegistration
     {
-        public string Session { get; set; }
-        public string Semester { get; set; }
+        [Required, DisplayName("Firstname"), MaxLength(50)]
+        public string FirstName { get; set; }
+
+        [Required, DisplayName("Lastname"), MaxLength(50)]
+        public string LastName { get; set; }
+
+        [DisplayName("Middlename"), MaxLength(50)]
+        public string MiddleName { get; set; }
+
+        [Required, DisplayName("Matric No"), MaxLength(11)]
+        public string RegistrationNumber { get; set; }
+
+        [Required, DataType(DataType.EmailAddress), MaxLength(128)]
+        public string Email { get; set; }
+
+        [Required, DataType(DataType.MultilineText), MaxLength(256)]
+        public string Address { get; set; }
+
+        [Required, DisplayName("Phone"), DataType(DataType.PhoneNumber), MaxLength(20)]
+        public string PhoneNumber { get; set; }
+
+        [Required, DisplayName("Date of Birth"), DataType(DataType.Date)]
+        public string DateOfBirth { get; set; }
+
+        [Required, EnumDataType(typeof(Gender))]
+        public string Gender { get; set; }
+
+        [Required, Display(Name = "Sponsor")]
+        public string SponsorName { get; set; }
+
+        [Required, Display(Name = "Sponsor Phone")]
+        public string SponsorPhone { get; set; }
+
+        [Required]
+        public string State { get; set; }
+
+        [Required, MaxLength(50), Display(Name = "L. G. A.")]
+        public string LGA { get; set; }
+
+        [Required, MaxLength(128)]
+        public string Hometown { get; set; }
+
+        [Required, DisplayName("Course"), MaxLength(128)]
+        public string CourseOfStudy { get; set; }
+
+        [Required, MaxLength(50)]
+        public string Department { get; set; }
+
+        [Required, EnumDataType(typeof(Level))]
         public string Level { get; set; }
+
+        [Required]
+        [FileSize(150000)]
+        [FileTypes("jpg,jpeg")]
+        public byte[] Photo { get; set; }
+
+        public string StudentType { get; set; }
+
+        public List<EnrolledCourses> Enroll { get; set; }
+    }
+
+    public class EnrolledCourses
+    {
+        public Course Courses { get; set; }
+        public Enrollment Enrolled { get; set; }
+        public string Session
+        {
+            get
+            {
+                if (DateTime.Now.Month >= 10)
+                {
+                    return DateTime.Now.Year + "/" + DateTime.Now.Year + 1;
+                }
+                else
+                {
+                    return DateTime.Now.Year - 1 + "/" + DateTime.Now.Year;
+                }
+            }
+        }
+        public string Submitted { get; set; }
+        public string Approved { get; set; }
     }
 }

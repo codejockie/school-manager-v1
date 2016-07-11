@@ -29,6 +29,9 @@ namespace CourseRegistrationSystem.Areas.CourseAdviser.Controllers
             ViewBag.Name = student.FirstName + " " + student.LastName;
             ViewBag.Id = student.Id;
 
+            if (student == null)
+                return HttpNotFound();
+
             IQueryable<StudentsViewCourses> query;
 
             string studentLevel = null;
