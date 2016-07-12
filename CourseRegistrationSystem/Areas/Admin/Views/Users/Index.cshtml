@@ -1,5 +1,9 @@
 ﻿@model CourseRegistrationSystem.Areas.Admin.ViewModels.UsersIndex
 
+@{
+    ViewBag.Title = "Index";
+}
+
 <h1>Users</h1>
 
 <div class="btn-toolbar">
@@ -13,7 +17,7 @@
             <th>Username</th>
             <th>Email</th>
             <th>Roles</th>
-            <th>Actions</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -34,7 +38,7 @@
                             <i class="glyphicon glyphicon-lock"></i>
                             Reset Password
                         </a>
-                        <a href="@Url.Action("delete", new { user.Id })" class="btn btn-xs btn-danger" data-post="Are you sure you want to delete @user.Username?">
+                        <a href="@Url.Action("delete", new { user.Id })" class="btn btn-xs btn-danger" data-post="Are you sure you want to delete @user.Username">
                             <i class="glyphicon glyphicon-remove"></i>
                             Delete
                         </a>

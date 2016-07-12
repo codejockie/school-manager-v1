@@ -1,0 +1,56 @@
+﻿@model CourseRegistrationSystem.Areas.Admin.ViewModels.StudentsIndex
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Students</h1>
+
+<div class="btn-toolbar">
+    <a href="@Url.Action("new")" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-plus"></i> Add Student</a>
+</div>
+
+<table class="table table-striped table-condensed">
+    <thead>
+        <tr class="text-uppercase">
+            <th>Matric No</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>State</th>
+            <th>Department/Course</th>
+            <th>Level</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model.Students)
+        {
+            <tr>
+                <td>@student.RegistrationNumber</td>
+                <td class="text-uppercase"> @student.LastName @student.FirstName @student.MiddleName</td>
+                <td>@student.Email</td>
+                <td class="text-uppercase">@student.State</td>
+                <td>@student.Department/@student.CourseOfStudy</td>
+                <td class="text-uppercase">
+                    @switch (student.Level)
+                    {
+                        case "LevelOne": <span> 100</span> break;
+                        case "LevelTwo": <span> 200</span> break;
+                        case "LevelThree": <span> 300</span> break;
+                        case "LevelFour": <span> 400</span> break;
+                        case "LevelFive": <span> 500</span> break;
+                    }
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <a href="@Url.Action("delete", new { student.Id })" class="btn btn-xs btn-danger" data-post="Are you sure you want to delete @student.FirstName">
+                            <i class="glyphicon glyphicon-remove"></i>
+                            Delete
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

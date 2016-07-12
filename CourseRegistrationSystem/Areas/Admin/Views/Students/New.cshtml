@@ -1,18 +1,19 @@
-﻿@model CourseRegistrationSystem.ViewModels.AuthRegister
+﻿@model CourseRegistrationSystem.Areas.Admin.ViewModels.StudentsNew
 
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "New Student";
 }
 
+<h2>New Student</h2>
+
 <div class="container">
-    <h2>Register</h2>
 
     @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <hr />
+
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
                 @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -201,7 +202,8 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Register" class="btn btn-primary" />
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <a href="@Url.Action("index")"> or cancel</a>
                 </div>
             </div>
         </div>

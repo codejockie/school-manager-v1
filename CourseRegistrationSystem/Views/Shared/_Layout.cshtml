@@ -53,11 +53,6 @@ if (tabName == ViewBag.SelectedTab)
                             <li><a href="@Url.RouteUrl("adminlogout")">Logout</a></li>
                         }
                     }
-                    else
-                    {
-                        <li class="@SelectedTabClass("login")"><a href="@Url.RouteUrl("login")">Login</a></li>
-                        <li class="@SelectedTabClass("register")"><a href="@Url.RouteUrl("register")">Register</a></li>
-                    }
                 </ul>
             </div>
         </div>

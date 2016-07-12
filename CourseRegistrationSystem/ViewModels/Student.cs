@@ -1,60 +1,14 @@
-﻿using CourseRegistrationSystem.Infrastructure;
+﻿using CourseRegistrationSystem.Helpers;
+using CourseRegistrationSystem.Infrastructure;
 using CourseRegistrationSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
-using System.Web.Mvc;
 
 namespace CourseRegistrationSystem.ViewModels
 {
-    public enum States
-    {
-        Abia,
-        Adamawa,
-        [Display(Name = "Akwa Ibom")]
-        Akwa_Ibom,
-        Anambra,
-        Bauchi,
-        Bayelsa,
-        Benue,
-        Bornu,
-        [Display(Name = "Cross River")]
-        Cross_River,
-        Delta,
-        Ebonyi,
-        Edo,
-        Ekiti,
-        Enugu,
-        [Display(Name = "FCT Abuja")]
-        FCT_Abuja,
-        Gombe,
-        Imo,
-        Jigawa,
-        Kaduna,
-        Kano,
-        Katsina,
-        Kebbi,
-        Kogi,
-        Kwara,
-        Lagos,
-        Nasarawa,
-        Niger,
-        Ogun,
-        Ondo,
-        Osun,
-        Oyo,
-        Plateau,
-        Rivers,
-        Sokoto,
-        Taraba,
-        Yobe,
-        Zamfara
-    }
     public class WelcomeIndex
     {
         public string FirstName { get; set; }

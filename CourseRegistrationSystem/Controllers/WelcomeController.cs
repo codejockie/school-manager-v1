@@ -1,4 +1,5 @@
-﻿using CourseRegistrationSystem.Models;
+﻿using CourseRegistrationSystem.Helpers;
+using CourseRegistrationSystem.Models;
 using CourseRegistrationSystem.ViewModels;
 using NHibernate.Linq;
 using System;
@@ -44,7 +45,7 @@ namespace CourseRegistrationSystem.Controllers
                 Success("Profile picture upload was successful", true);
                 return RedirectToAction("index");
             }
-            catch (Exception e)
+            catch
             {
                 Danger("Oops! something went wrong, we're sorry. Please try again later", true);
                 return RedirectToAction("index");

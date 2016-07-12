@@ -186,6 +186,7 @@
     <Content Include="Areas\CourseAdviser\Views\_ViewStart.cshtml" />
     <Content Include="Areas\CourseAdviser\Views\Students\ViewCourses.cshtml" />
     <Content Include="Areas\CourseAdviser\Views\Messages\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Students\Index.cshtml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
     <Content Include="Scripts\jk-site.js" />
     <Content Include="Scripts\jquery-2.2.4.js" />
@@ -210,8 +211,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CoursesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StudentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Courses.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Students.cs" />
     <Compile Include="Areas\Admin\ViewModels\Users.cs" />
     <Compile Include="Areas\CourseAdviser\Controllers\MessagesController.cs" />
     <Compile Include="Areas\CourseAdviser\Controllers\StudentsController.cs" />
@@ -227,6 +230,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Alerts.cs" />
+    <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Infrastructure\FileSizeAttribute.cs" />
     <Compile Include="Infrastructure\FileTypesAttribute.cs" />
     <Compile Include="Infrastructure\RoleProvider.cs" />
@@ -271,10 +275,10 @@
     <Content Include="Views\Welcome\EditorTemplates\CourseViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Enum.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Enum.cshtml" />
-    <Content Include="Views\Auth\Register.cshtml" />
+    <Content Include="Areas\Admin\Views\Students\New.cshtml" />
     <Content Include="Views\Auth\AdminLogin.cshtml" />
     <Content Include="Views\Shared\_Alerts.cshtml" />
-    <Content Include="Views\Auth\NewStudent.cshtml" />
+    <Content Include="Areas\Admin\Views\Students\NewStudent.cshtml" />
     <Content Include="Views\Shared\_ProfileLayout.cshtml" />
     <Content Include="Views\Welcome\Rule.cshtml" />
     <Content Include="Views\Welcome\_Approved.cshtml" />
