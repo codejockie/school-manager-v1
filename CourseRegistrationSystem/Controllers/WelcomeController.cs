@@ -278,11 +278,6 @@ namespace CourseRegistrationSystem.Controllers
             }
         }
 
-        public ActionResult Rule()
-        {
-            return View();
-        }
-
         public ActionResult ViewRegistration()
         {
             var model = new WelcomeViewRegistration();
@@ -360,15 +355,22 @@ namespace CourseRegistrationSystem.Controllers
             else
                 semester = "Second";
 
-            var registeredApproved = Database.Session.Query<Enrollment>().Where(x => x.StudentId == student.Id && x.Level == studentLevel && x.Semester == semester)
+            var isApproved = Database.Session.Query<Enrollment>().Where(x => x.StudentId == student.Id && x.Level == studentLevel && x.Semester == semester)
                 .Any(x => x.Status == "Approved");
 
-            if (registeredApproved)
+            var isPending = Database.Session.Query<Enrollment>().Where(x => x.StudentId == student.Id && x.Level == studentLevel && x.Semester == semester)
+                .Any(x => x.Status == "Pending");
+
+            if (isApproved)
             {
                 return PartialView("ApprovedRegistration", model);
             }
+            else if (isPending)
+            {
+                return PartialView("PendingRegistration", model);
+            }
 
-            return PartialView(model);
+            return PartialView();
         }
     }
 }

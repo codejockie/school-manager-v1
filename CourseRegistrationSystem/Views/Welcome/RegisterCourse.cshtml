@@ -58,15 +58,15 @@
             </tr>
             <tr>
                 <td>Level: </td>
-                <td class="d-text">
+                <td class="d-text text-uppercase">
                     @{
                         switch (Model.Level)
                         {
-                            case "LevelOne": <span class="text-uppercase"> 100 Level</span> break;
-                            case "LevelTwo": <span class="text-uppercase"> 200 Level</span> break;
-                            case "LevelThree": <span class="text-uppercase"> 300 Level</span> break;
-                            case "LevelFour": <span class="text-uppercase"> 400 Level</span> break;
-                            case "LevelFive": <span class="text-uppercase"> 500 Level</span> break;
+                            case "LevelOne": <text> 100 Level</text> break;
+                            case "LevelTwo": <text> 200 Level</text> break;
+                            case "LevelThree": <text> 300 Level</text> break;
+                            case "LevelFour": <text> 400 Level</text> break;
+                            case "LevelFive": <text> 500 Level</text> break;
                         }
                     }
                 </td>
@@ -97,11 +97,20 @@
                     <tbody>
                         @Html.EditorFor(m => m.Courses)
                     </tbody>
+                    <tfoot>
+                        <tr class="text-uppercase">
+                            <td></td>
+                            <td></td>
+                            <td><strong>Total Unit Load</strong></td>
+                            <td id="totalUnit" style="text-align: center;"></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
                 </table>
                 <br />
 
                 <div>
-                    <input type="submit" value="Register Course" class="btn btn-primary" id="btn-register" />
+                    <input type="submit" value="Register" class="btn btn-primary" id="btn-register" />
                 </div>
 
                 <hr />
@@ -116,10 +125,40 @@
                             $("#chkSelectAll").prop("checked", false);
                     });
 
+                    $('.chkSelect').on("click", function () {
+                        console.log($(this).next().html());
+                        var totalUnit = 0;
+
+                        $('.chkSelect:checked').each(function () {
+                            totalUnit += parseInt($('.unit').html());
+                        });
+
+                        if (totalUnit != 0) {
+                            $('#totalUnit').text(totalUnit)
+                            .css("font-weight", "bolder");
+                        }
+                        else {
+                            $('#totalUnit').text("");
+                        }
+                        
+                    });
+
+                    $("form").on("submit", function (event) {
+                        $totalUnit = parseInt($('#totalUnit').text());
+
+                        if (isNaN($totalUnit)) {
+                            alert("You must select a course in order to register. \nUse the checkboxes beside each course to select a course.");
+                            event.preventDefault();
+                        }
+                        else if ($totalUnit < 15 || $totalUnit > 24) {
+                            alert("Total Unit selected is " + $totalUnit +
+                                "\nMinimum Unit is 15, Maximum Unit is 24");
+                            event.preventDefault();
+                        }
+                    })
+
                     $(".courseType:contains(Elective)").each(function () {
-                        $(this).addClass("btn btn-xs btn-info")
-                            .css("color", "#007196")
-                            .css("font-size", "10px")
+                        $(this).addClass("glyphicon glyphicon-info")
                             .attr({
                                 'data-container': 'body',
                                 "data-toggle": "popover",

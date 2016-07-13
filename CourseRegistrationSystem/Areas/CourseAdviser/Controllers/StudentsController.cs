@@ -57,6 +57,7 @@ namespace CourseRegistrationSystem.Areas.CourseAdviser.Controllers
                             Status = enrolled,
                             Students = student
                         };
+                ViewBag.Semester = "First Semester";
             }
             else
             {
@@ -70,6 +71,7 @@ namespace CourseRegistrationSystem.Areas.CourseAdviser.Controllers
                             Status = enrolled,
                             Students = student
                         };
+                ViewBag.Semester = "Second Semester";
             }
 
             return View(query.ToList());

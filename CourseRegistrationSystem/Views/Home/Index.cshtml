@@ -4,15 +4,18 @@
 
 
 <div class="container">
-        <div class="jumbotron">
-            <h1>Computer Science Department Portal</h1>
-            <p class="text-justify">
-                Welcome to the Departmental Portal. This portal was developed in ASP.NET MVC 5 using various technologies like HTML5, CSS3, JavaScript for Client-side, and C# for the Server-side. The Website is mobile-friendly as it uses the famous Bootstrap framework in the frontend.
-            </p>
-            <p class="text-justify">
-                It improves on the current school portal in areas like automated semester and session determination in that students no longer need to select their level, the current session and semester. On the course registration side courses are automatically populated based on student's level, and current semester.
-            </p>
+    <div class="jumbotron">
+        <h1>Computer Science Department Portal</h1>
+        <p class="text-justify">
+            Welcome to the Departmental Portal. This portal was developed in ASP.NET MVC 5 using various technologies like HTML5, CSS3, JavaScript on the Client-side, and C# on the Server-side. The Website is mobile-friendly as it uses the famous Bootstrap framework in the frontend.
+        </p>
+        <div>
+            <a href="@Url.Action("rule")">
+                <i class="glyphicon glyphicon-circle-arrow-right"></i>
+                Registration Rules
+            </a>
         </div>
+    </div>
 
     <div class="row">
         <div class="col-md-4 col-lg-4">

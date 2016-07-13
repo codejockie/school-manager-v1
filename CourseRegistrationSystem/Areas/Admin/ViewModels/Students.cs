@@ -93,7 +93,6 @@ namespace CourseRegistrationSystem.Areas.Admin.ViewModels
 
         public Disability Disability { get; set; }
 
-        [Required]
         [FileSize(150000)]
         [FileTypes("jpg,jpeg")]
         public HttpPostedFileBase Photo { get; set; }

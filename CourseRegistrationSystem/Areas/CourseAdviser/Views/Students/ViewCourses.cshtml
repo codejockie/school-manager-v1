@@ -1,10 +1,17 @@
 ﻿@model IEnumerable<CourseRegistrationSystem.Areas.CourseAdviser.ViewModels.StudentsViewCourses>
 
 @{
-    ViewBag.Title = "Registered Courses";
+    ViewBag.Title = ViewBag.Name + "'s " + "Registered Courses";
+
+    int i = 1;
+    int totalUnit = 0;
+    foreach (var item in Model)
+    {
+        totalUnit += int.Parse(item.Courses.Credit);
+    }
 }
 
-<h2>Registered Courses for @ViewBag.Name</h2>
+<h3>Courses Registered by @ViewBag.Name for @ViewBag.Semester</h3>
 
 <table class="table table-condensed table-striped">
     <thead>
@@ -29,6 +36,14 @@
                 <td class="text-uppercase" id="status">@item.Status.Status</td>
             </tr>
         }
+        <tr>
+            <td></td>
+            <td class="text-uppercase"><strong>Total Units Registered till Date</strong></td>
+            <td><strong>@totalUnit</strong></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
     </tbody>
 </table>
 @using (Html.BeginForm("approve", "students", new { ViewBag.Id }, FormMethod.Post))

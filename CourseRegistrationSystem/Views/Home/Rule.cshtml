@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Registration Rules";
+}
+
+<div class="container" id="rule">
+    <h2>Registration Rule</h2>
+    <p>
+        Please note that in order to register your courses for each semester you have to ensure that your system's date is correct and set to the present day/month/year on which you are registering. This is so as to avoid loading previous semester courses.
+    </p>
+    <p>
+        Registration begins two weeks after resumption for each semester, and ends two months after the begin date. After the ending date, a grace period is allowed for those that couldn't register. This period is termed late registration period and it attracts a fine of #2,000 to be paid to departmental account.
+    </p>
+    <p>
+        On the registration page you can click on each elective course under the <span class="text-info rule">"Course Type"</span> column to find out more on the course, clicking again disables the popover. You could also simply hover on each course under the <span class="text-info rule">"Course Title"</span> column to see a tooltip.
+    </p>
+
+    <div class="btn-group">
+        <a href="@Url.RouteUrl("home")" class="btn btn-sm btn-default">
+            <i class="glyphicon glyphicon-circle-arrow-left"></i>
+            Return to homepage
+        </a>
+        <a href="@Url.RouteUrl("login")" class="btn btn-sm btn-info">
+            <i class="glyphicon glyphicon-circle-arrow-right"></i>
+            Click here to Login
+        </a>
+    </div>
+</div>

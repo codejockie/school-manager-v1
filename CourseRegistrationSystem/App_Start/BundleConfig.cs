@@ -33,7 +33,7 @@ namespace CourseRegistrationSystem
                 .Include("~/scripts/jquery.validate.unobtrusive.js")
                 .Include("~/scripts/jquery.unobtrusive-ajax.min.js")
                 .Include("~/scripts/bootstrap.js")
-                .Include("~/scripts/jk-site.js"));
+                .Include("~/scripts/main.js"));
         }
     }
 }

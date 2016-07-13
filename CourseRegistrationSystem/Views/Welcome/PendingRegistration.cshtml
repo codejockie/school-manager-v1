@@ -8,7 +8,7 @@
         totalUnit += int.Parse(item.Courses.Credit);
     }
 }
-<div class="col-md-8 col-md-offset-1" id="printRegistration">
+<div class="col-md-8 col-md-offset-1">
     <div class="schoolheading">
         <span class="pull-right">
             @{
@@ -138,7 +138,6 @@
             </tr>
         </thead>
         <tbody>
-
             @foreach (var item in Model.Enroll)
             {
                 <tr id="rctbody">
@@ -148,8 +147,8 @@
                     <td class="text-uppercase">@item.Courses.CourseTitle</td>
                     <td class="text-uppercase">@item.Courses.Semester</td>
                     <td>@item.Courses.Credit</td>
-                    <td><i class="glyphicon glyphicon-ok" style="color: green; font-size: medium;"></i></td>
-                    <td><i class="glyphicon glyphicon-ok" style="color: green; font-size: medium;"></i></td>
+                    <td><i class="glyphicon glyphicon-ok" style="color: green; font-size:medium;"></i></td>
+                    <td><i class="glyphicon glyphicon-remove" style="color: red; font-size:medium;"></i></td>
                 </tr>
             }
         </tbody>
@@ -167,23 +166,5 @@
             </tr>
         </tfoot>
     </table>
-    <div id="name-sign">
-        <p>Academic Adviser's Name & Signature ____________________________________  Date:__________________</p>
-        <p>Head of Department's Name & Signature _________________________________  Date:__________________</p>
-        <p>Faculty Officer's Name & Signature _______________________________________  Date:__________________</p>
-    </div>
 </div>
-<div class="col-md-8 col-md-offset-1">
-    <input class="btn btn-info" id="printBtn" type="button" value="Print" />
-    <br />
-    <hr />
-</div>
-<script>
-    
 
-    $.ajax({
-        success: function () {
-            //CallPrint('printRegistration');
-        }
-    })
-</script>

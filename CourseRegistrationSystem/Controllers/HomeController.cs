@@ -15,5 +15,10 @@ namespace CourseRegistrationSystem.Controllers
         {
             return View();
         }
+
+        public ActionResult Rule()
+        {
+            return View();
+        }
     }
 }

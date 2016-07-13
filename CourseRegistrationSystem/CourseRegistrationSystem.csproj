@@ -188,7 +188,7 @@
     <Content Include="Areas\CourseAdviser\Views\Messages\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Students\Index.cshtml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
-    <Content Include="Scripts\jk-site.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\jquery-2.2.4.js" />
     <Content Include="Scripts\jquery-2.2.4.min.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.js" />
@@ -280,11 +280,12 @@
     <Content Include="Views\Shared\_Alerts.cshtml" />
     <Content Include="Areas\Admin\Views\Students\NewStudent.cshtml" />
     <Content Include="Views\Shared\_ProfileLayout.cshtml" />
-    <Content Include="Views\Welcome\Rule.cshtml" />
+    <Content Include="Views\Home\Rule.cshtml" />
     <Content Include="Views\Welcome\_Approved.cshtml" />
     <Content Include="Views\Welcome\_Pending.cshtml" />
     <Content Include="Views\Welcome\ViewRegistration.cshtml" />
     <Content Include="Views\Welcome\ApprovedRegistration.cshtml" />
+    <Content Include="Views\Welcome\PendingRegistration.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
