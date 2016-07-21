@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace CourseRegistrationSystem.Areas.CourseAdviser.Controllers
 {
+    [Authorize(Roles = "course adviser")]
     [SelectedTab("messages")]
     public class MessagesController : Controller
     {

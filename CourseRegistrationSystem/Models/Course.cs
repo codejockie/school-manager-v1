@@ -9,6 +9,7 @@ namespace CourseRegistrationSystem.Models
         public virtual int CourseId { get; set; } // course_id column
         public virtual string CourseCode { get; set; } // course_code column
         public virtual string CourseTitle { get; set; } // course_title column
+        public virtual string Department { get; set; } // department column
         public virtual string LecturerName { get; set; } // lecturer_name column
         public virtual int Level { get; set; } // level column
         public virtual string Semester { get; set; } // semester column
@@ -44,6 +45,7 @@ namespace CourseRegistrationSystem.Models
                 x.Column("course_title");
                 x.NotNullable(true);
             });
+            Property(x => x.Department, x => x.NotNullable(true));
             Property(x => x.LecturerName, x =>
             {
                 x.Column("lecturer_name");

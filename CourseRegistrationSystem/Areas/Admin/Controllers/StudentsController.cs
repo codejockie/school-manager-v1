@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace CourseRegistrationSystem.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "admin")]
     [SelectedTab("students")]
     public class StudentsController : BaseController
     {
@@ -27,8 +28,11 @@ namespace CourseRegistrationSystem.Areas.Admin.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
+        // handles the post when add student form is submitted
+        // StudentsNew VM is passed as a parameter
         public ActionResult New(StudentsNew form)
         {
+            // creates a student model object/instance
             var student = new Student();
 
             if (!ModelState.IsValid)
@@ -36,6 +40,8 @@ namespace CourseRegistrationSystem.Areas.Admin.Controllers
                 return View(form);
             }
 
+            // assign all typed in values in the various form fields
+            // to their respective Model properties
             student.FirstName = form.FirstName;
             student.LastName = form.LastName;
             student.MiddleName = form.MiddleName;
@@ -52,6 +58,9 @@ namespace CourseRegistrationSystem.Areas.Admin.Controllers
             student.LGA = form.LGA;
             student.Hometown = form.Hometown;
 
+            // checks which Level enum was selected on the form
+            // then assigns differing levels to the student model
+            // based on the selection
             switch (form.Level)
             {
                 case Helpers.Level.FirstYear:
@@ -73,13 +82,19 @@ namespace CourseRegistrationSystem.Areas.Admin.Controllers
             student.Genotype = form.Genotype.ToString();
             student.StudentType = form.StudentType.ToString();
 
+            // checks if a picture was upload, if true it
+            // enters the block else it skips the block
             if (form.Photo != null)
             {
+                // converts the pix to byte & assigns it to an array (uploadedPhoto)
                 byte[] uploadedPhoto = new byte[form.Photo.InputStream.Length];
+                // reads the byte array
                 form.Photo.InputStream.Read(uploadedPhoto, 0, uploadedPhoto.Length);
+                // assigns the converted pix to the student Photo property
                 student.Photo = uploadedPhoto; 
             }
 
+            // calls Save()
             Database.Session.Save(student);
 
             return RedirectToAction("index", "students");

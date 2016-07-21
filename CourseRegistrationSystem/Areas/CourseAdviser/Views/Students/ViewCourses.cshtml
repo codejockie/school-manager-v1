@@ -69,11 +69,13 @@
         });
         $(function () {
             //var $heading = $('h3').text();
-            var $rowItemCheck = $('div tbody');
+            var $thead = $('div thead');
+            var $tbody = $('div tbody');
             var $tfoot = $('div tfoot');
-            if ($rowItemCheck.empty()) {
+            if ($tbody.empty()) {
                 //var subHeading = $heading.substr(22, 14);
-                $('h3').text("@ViewBag.Name is yet to register for the current semester");
+                $('h3').addClass("text-info").text("@ViewBag.Name is yet to register for the current semester");
+                $thead.hide();
                 $tfoot.hide();
                 $('#btn-approve').hide();
             }

@@ -1,11 +1,7 @@
 ﻿using CourseRegistrationSystem.Models;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CourseRegistrationSystem.Areas.Admin.ViewModels
 {
@@ -21,6 +17,9 @@ namespace CourseRegistrationSystem.Areas.Admin.ViewModels
 
         [Required, MaxLength(150), DisplayName("Course Title")]
         public string CourseTitle { get; set; }
+
+        [Required, MaxLength(150)]
+        public string Department { get; set; }
 
         [MaxLength(128), DisplayName("Lecturer")]
         public string LecturerName { get; set; }
@@ -45,6 +44,9 @@ namespace CourseRegistrationSystem.Areas.Admin.ViewModels
 
         [Required, MaxLength(150), DisplayName("Course Title")]
         public string CourseTitle { get; set; }
+
+        [Required, MaxLength(150)]
+        public string Department { get; set; }
 
         [MaxLength(128), DisplayName("Lecturer")]
         public string LecturerName { get; set; }

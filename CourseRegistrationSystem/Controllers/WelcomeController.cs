@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace CourseRegistrationSystem.Controllers
 {
-    [Authorize(Roles = "student")] // prevents access to this page by an unauthorised user
+    [Authorize(Roles = "student")] // prevents access to this page by an unauthorised user, only a "student" is allowed
     [RoutePrefix("welcome")] // routes the url http://localhost:36152/welcome
     [Route("{action=Index}/{id=}")] // tells routing engine that default page is Index.cshtml and also that the id is optional ie. http://localhost:36152/index/id
     public class WelcomeController : BaseController // handles the Welcome page ie. the student profile
@@ -170,11 +170,15 @@ namespace CourseRegistrationSystem.Controllers
             if (!ModelState.IsValid)
                 return PartialView(form);
 
-            // these assign their form values to their respective Student Model equivalent to persist
+            // these assign their form values to their respective Student Model equivalent to persist/save
             // to the DB
             student.Email = form.Email;
             student.Address = form.Address;
             student.PhoneNumber = form.PhoneNumber;
+            student.DateOfBirth = Convert.ToDateTime(form.DateOfBirth);
+            student.Gender = form.Gender.ToString();
+            student.SponsorName = form.SponsorName;
+            student.SponsorPhone = form.SponsorPhone;
             student.BloodGroup = form.BloodGroup.ToString();
             student.Genotype = form.Genotype.ToString();
             student.Disability = form.Disability.ToString();
@@ -213,18 +217,18 @@ namespace CourseRegistrationSystem.Controllers
             if (DateTime.Now.Month < 3 || DateTime.Now.Month >= 10)
             {
                 // loads first semester courses based on the student's level ie. the student only sees
-                // the courses pertaining to his/her level and assigns the loaded list of courses to
+                // the courses pertaining to his/her level, department and assigns the loaded list of courses to
                 // the courses variable
                 courses = Database.Session.Query<Course>()
-                    .Where(c => c.Level == student.Level && c.Semester == "First").ToList();
+                    .Where(c => c.Level == student.Level && c.Semester == "First" && c.Department == student.Department).ToList();
             }
             else
             {
                 // loads second semester courses based on the student's level ie. the student only sees
-                // the courses pertaining to his/her level and assigns the loaded list of courses to
+                // the courses pertaining to his/her level, department and assigns the loaded list of courses to
                 // the courses variable
                 courses = Database.Session.Query<Course>()
-                    .Where(c => c.Level == student.Level && c.Semester == "Second").ToList();
+                    .Where(c => c.Level == student.Level && c.Semester == "Second" && c.Department == student.Department).ToList();
             }
 
             // iterates through all the courses passed/assigned into the courses variable
@@ -373,7 +377,7 @@ namespace CourseRegistrationSystem.Controllers
                 query = from students in Database.Session.Query<Student>()
                         join enrolled in Database.Session.Query<Enrollment>() on students.Id equals enrolled.StudentId
                         join courses in Database.Session.Query<Course>() on enrolled.CourseId equals courses.CourseId
-                        where courses.Level == student.Level && courses.Semester == "First"
+                        where courses.Level == student.Level && courses.Semester == "First" && courses.Department == student.Department
                         select new EnrolledCourses
                         {
                             Courses = courses,
@@ -386,7 +390,7 @@ namespace CourseRegistrationSystem.Controllers
                 query = from students in Database.Session.Query<Student>()
                         join enrolled in Database.Session.Query<Enrollment>() on students.Id equals enrolled.StudentId
                         join courses in Database.Session.Query<Course>() on enrolled.CourseId equals courses.CourseId
-                        where courses.Level == student.Level && courses.Semester == "Second"
+                        where courses.Level == student.Level && courses.Semester == "Second" && courses.Department == student.Department
                         select new EnrolledCourses
                         {
                             Courses = courses,
@@ -441,12 +445,12 @@ namespace CourseRegistrationSystem.Controllers
             if (DateTime.Now.Month < 3 || DateTime.Now.Month >= 10)
             {
                 courses = Database.Session.Query<Course>()
-                    .Where(c => c.Level <= student.Level && c.Level != student.Level && c.Semester == "First").ToList();
+                    .Where(c => c.Level <= student.Level && c.Level != student.Level && c.Semester == "First" && c.Department == student.Department).ToList();
             }
             else
             {
                 courses = Database.Session.Query<Course>()
-                    .Where(c => c.Level <= student.Level && c.Level != student.Level && c.Semester == "Second").ToList();
+                    .Where(c => c.Level <= student.Level && c.Level != student.Level && c.Semester == "Second" && c.Department == student.Department).ToList();
             }
 
             foreach (var course in courses)

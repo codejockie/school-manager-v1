@@ -3,7 +3,7 @@ using System.Data;
 
 namespace CourseRegistrationSystem.Migrations
 {
-    [Migration(1)] // the number is used to keep track of the migration
+    [Migration(1, "roles, users and role_users tables")] // the number is used to keep track of the migration
     // this class is used to migrate/create the users, roles, role_users tables
     /// dynamically when DeployDbb-Dev.bat in Tools folder is executed
     public class _001_UsersAndRoles : Migration
@@ -33,6 +33,23 @@ namespace CourseRegistrationSystem.Migrations
             Create.Table("role_users")
                 .WithColumn("user_id").AsInt32().ForeignKey("users", "id").OnDelete(Rule.Cascade)
                 .WithColumn("role_id").AsInt32().ForeignKey("roles", "id").OnDelete(Rule.Cascade);
+
+            // inserts four different users to the users table
+            Insert.IntoTable("users").Row(new { username = "sandraozokolo", email = "ozokolosandra@gmail.com", password_hash = "$2a$13$PhxJKQ9c9EWFS4DH14QZYujI0SIUWYXvhAT0tUhaIq5LMcC348J.m" });
+            Insert.IntoTable("users").Row(new { username = "sandra", email = "ozokolosandra@gmail.com", password_hash = "$2a$13$VDCJ.q3YRuxD1fiwsoJBV.W.X9YTQ6XpNyCw2sC7URrXBcQW7DD8S" });
+            Insert.IntoTable("users").Row(new { username = "2012/182093", email = "ozokolosandra@gmail.com", password_hash = "$2a$13$utDhzUdBJq.XYxuhlFYEs.snHs6FGJaPgj6suYrHr6Bm31zcnSVDy" });
+            Insert.IntoTable("users").Row(new { username = "2013/187803", email = "justrandom@gmail.com", password_hash = "$2a$13$8maVEm7hDUicYsMrz/pbsu9ixKrmQcUJm8xM4W/5LzXFAKtoab9Z6" });
+
+            // inserts three types of roles to the roles table
+            Insert.IntoTable("roles").Row(new { name = "admin" });
+            Insert.IntoTable("roles").Row(new { name = "course adviser" });
+            Insert.IntoTable("roles").Row(new { name = "student" });
+
+            // inserts roles' ids and users' ids as F. Keys to role_users table
+            Insert.IntoTable("role_users").Row(new { user_id = 1, role_id = 1 });
+            Insert.IntoTable("role_users").Row(new { user_id = 2, role_id = 2 });
+            Insert.IntoTable("role_users").Row(new { user_id = 3, role_id = 3 });
+            Insert.IntoTable("role_users").Row(new { user_id = 4, role_id = 3 });
         }
     }
 }
