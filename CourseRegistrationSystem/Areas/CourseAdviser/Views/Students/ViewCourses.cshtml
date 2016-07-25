@@ -12,7 +12,7 @@
 
 <h3>Courses Registered by @ViewBag.Name for @ViewBag.Semester</h3>
 
-<table class="table table-condensed table-striped">
+<table class="table table-condensed table-striped" id="registered-courses">
     <thead>
         <tr>
             <th>Course Code</th>
@@ -69,10 +69,10 @@
         });
         $(function () {
             //var $heading = $('h3').text();
-            var $thead = $('div thead');
-            var $tbody = $('div tbody');
-            var $tfoot = $('div tfoot');
-            if ($tbody.empty()) {
+            var $thead = $('#registered-courses thead');
+            var $tbody = $('#registered-courses tbody tr');
+            var $tfoot = $('#registered-courses tfoot');
+            if ($tbody.contents().length == 0) {
                 //var subHeading = $heading.substr(22, 14);
                 $('h3').addClass("text-info").text("@ViewBag.Name is yet to register for the current semester");
                 $thead.hide();

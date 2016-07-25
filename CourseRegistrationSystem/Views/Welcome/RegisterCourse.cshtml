@@ -85,7 +85,7 @@
                             <th>Course Type</th>
                         </tr>
                     </thead>
-                    <tbody id="courses">
+                    <tbody id="coursesList">
                         @Html.EditorFor(m => m.Courses)
                     </tbody>
                     <tfoot>
@@ -168,15 +168,15 @@
                     });
 
                     $('.chkSelect').on("click", function () {
-                        console.log($(this).next().html());
                         var totalUnit = 0;
 
                         $('.chkSelect:checked').each(function () {
-                            totalUnit += parseInt($('.unit').html());
+                            $unit = $(this).closest('tr').children(':nth-child(4)').html();
+                            totalUnit += parseInt($unit);
                         });
 
                         if (totalUnit != 0) {
-                            $('#totalUnit').text(totalUnit)
+                            $('#totalUnit').html(totalUnit)
                             .css("font-weight", "bolder");
                         }
                         else {

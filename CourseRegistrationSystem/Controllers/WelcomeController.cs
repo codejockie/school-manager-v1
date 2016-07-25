@@ -109,13 +109,16 @@ namespace CourseRegistrationSystem.Controllers
             // checks if the user filled the form correctly, if not it doesn't permit submission,
             // then returns the form again showing the errors
             if (!ModelState.IsValid)
+            {
+                Json(new { Success = false });
                 return PartialView(form);
+            }
 
             // calls the SetPassword() on form.Password ie. user's entered password and hashes it
             user.SetPassword(form.Password);
             Database.Session.Update(user); // saves it to the DB
 
-            return RedirectToAction("index");
+            return Json(new { Success = true });
         }
 
         // handles the Biodata.cshtml View, presents the edit form to the user
@@ -168,7 +171,10 @@ namespace CourseRegistrationSystem.Controllers
                 return HttpNotFound();
 
             if (!ModelState.IsValid)
+            {
+                Json(new { Success = false });
                 return PartialView(form);
+            }
 
             // these assign their form values to their respective Student Model equivalent to persist/save
             // to the DB
@@ -185,7 +191,7 @@ namespace CourseRegistrationSystem.Controllers
 
             Database.Session.SaveOrUpdate(student); // saves/updates the Model to the DB
 
-            return RedirectToAction("index");
+            return Json(new { Success = true });
         }
 
         // handles the RegisterCourse.cshtml View
