@@ -15,9 +15,10 @@ namespace CourseRegistrationSystem.Migrations
             Create.Table("courses")
                 .WithColumn("course_id").AsInt32().PrimaryKey().Identity() // PK auto-increment
                 .WithColumn("course_code").AsString(7).NotNullable()
-                .WithColumn("course_title").AsString(150).NotNullable()
-                .WithColumn("department").AsString(150).NotNullable()
-                .WithColumn("lecturer_name").AsString(128).Nullable().WithDefaultValue("Not Available")
+                .WithColumn("course_title").AsString(50).NotNullable()
+                .WithColumn("course_info").AsCustom("VARCHAR(256)").Nullable()
+                .WithColumn("department").AsString(50).NotNullable()
+                .WithColumn("lecturer_name").AsString(50).Nullable().WithDefaultValue("Not Available")
                 .WithColumn("level").AsInt32().NotNullable()
                 .WithColumn("semester").AsString(7).NotNullable()
                 .WithColumn("credit").AsString(7).NotNullable()

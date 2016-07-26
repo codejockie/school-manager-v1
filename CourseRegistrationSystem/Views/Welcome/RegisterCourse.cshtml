@@ -125,7 +125,7 @@
 
                         $("#dialog-add-courses").dialog("close");
                     }
-                    
+
                     $(function () {
                         $.ajaxSetup({ cache: false });
 
@@ -182,12 +182,13 @@
                         else {
                             $('#totalUnit').text("");
                         }
-                        
                     });
 
+                    // acts when the register button is clicked
                     $("form").on("submit", function (event) {
                         $totalUnit = parseInt($('#totalUnit').text());
 
+                        // checks if $totalUnit is NaN (not a number)
                         if (isNaN($totalUnit)) {
                             alert("You must select a course in order to register. \nUse the checkboxes beside each course to select a course.");
                             event.preventDefault();
@@ -197,28 +198,29 @@
                                 "\nMinimum Unit is 15, Maximum Unit is 24");
                             event.preventDefault();
                         }
-                    })
+                    });
 
+                    $(".courseType:contains(Elective)").on("click", function () {
+                        $(function () {
+                            $.ajaxSetup({ cache: true });
+                            $('#dialog').dialog();
+                        });
+                    });
+
+                    // colours the table part that contains Elective green
                     $(".courseType:contains(Elective)").each(function () {
-                        $(this).attr({
-                                'data-container': 'body',
-                                "data-toggle": "popover",
-                                "data-placement": "right",
-                                "data-content": "This is an elective course",
-                                "data-original-title": "",
-                                "title": ""
-                            });
+                        $(this).addClass("success");
                     });
 
                     $(".course-title").each(function () {
-                                $(this).attr({
-                                    'data-container': 'body',
-                                    "data-toggle": "tooltip",
-                                    "data-placement": "top",
-                                    "data-content": "",
-                                    "data-original-title": $(this).text(),
-                                    "title": ""
-                                });
+                        $(this).attr({
+                            'data-container': 'body',
+                            "data-toggle": "tooltip",
+                            "data-placement": "top",
+                            "data-content": "",
+                            "data-original-title": $(this).text(),
+                            "title": ""
+                        });
                     });
 
                     function tool_tip() {
@@ -231,19 +233,7 @@
                         success: function (data) {
                             tool_tip();  // Call function again for AJAX loaded content
                         }
-                    })
-
-                    function pop_over() {
-                        $('[data-toggle="popover"]').popover()
-                    }
-
-                    pop_over();  // Call in document ready for elements already present
-
-                    $.ajax({
-                        success: function (data) {
-                            pop_over();  // Call function again for AJAX loaded content
-                        }
-                    })
+                    });
                 </script>
             }
         </div>

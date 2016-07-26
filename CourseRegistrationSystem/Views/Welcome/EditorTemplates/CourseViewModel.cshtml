@@ -15,5 +15,8 @@
     </td>
     <td class="courseType">
         @Html.DisplayFor(t => t.Type)
+        <p id="dialog" style="display: none;">
+            @Html.DisplayTextFor(ca => ca.CourseInfo)
+        </p>
     </td>
 </tr>

@@ -23,8 +23,8 @@
 
     <div class="container">
         <ul class="nav nav-tabs">
-            <li class="@SelectedTabClass("messages")">
-                @Html.ActionLink("Messages", "index", "messages", new { area = "courseadviser" }, new { })
+            <li class="@SelectedTabClass("courses")">
+                @Html.ActionLink("Courses", "index", "courses", new { area = "courseadviser" }, new { })
             </li>
             <li class="@SelectedTabClass("students")">
                 @Html.ActionLink("Students", "index", "students", new { area = "courseadviser" }, new { })
@@ -36,6 +36,7 @@
                 @Html.RouteLink("Logout", "adminlogout")
             </li>
         </ul>
+        @{ Html.RenderPartial("_Alerts"); }
 
         @RenderBody()
     </div>

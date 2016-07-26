@@ -63,6 +63,7 @@ namespace CourseRegistrationSystem.ViewModels
         public bool IsSelected { get; set; }
         public string CourseCode { get; set; }
         public string CourseTitle { get; set; }
+        public string CourseInfo { get; set; }
         public string Credit { get; set; }
         public string Type { get; set; }
     }

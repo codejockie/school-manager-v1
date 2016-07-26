@@ -248,6 +248,7 @@ namespace CourseRegistrationSystem.Controllers
                     Id = course.CourseId,
                     CourseCode = course.CourseCode,
                     CourseTitle = course.CourseTitle,
+                    CourseInfo = course.CourseInfo,
                     Credit = course.Credit,
                     Type = course.Type,
                     IsSelected = false

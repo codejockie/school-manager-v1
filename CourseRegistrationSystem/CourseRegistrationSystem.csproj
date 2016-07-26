@@ -186,8 +186,10 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\CourseAdviser\Views\_ViewStart.cshtml" />
     <Content Include="Areas\CourseAdviser\Views\Students\ViewCourses.cshtml" />
-    <Content Include="Areas\CourseAdviser\Views\Messages\Index.cshtml" />
+    <Content Include="Areas\CourseAdviser\Views\Courses\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Students\Index.cshtml" />
+    <Content Include="Areas\CourseAdviser\Views\Courses\AddInfo.cshtml" />
+    <Content Include="Areas\CourseAdviser\Views\Shared\_Alerts.cshtml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\jquery-2.2.4.js" />
@@ -217,7 +219,7 @@
     <Compile Include="Areas\Admin\ViewModels\Courses.cs" />
     <Compile Include="Areas\Admin\ViewModels\Students.cs" />
     <Compile Include="Areas\Admin\ViewModels\Users.cs" />
-    <Compile Include="Areas\CourseAdviser\Controllers\MessagesController.cs" />
+    <Compile Include="Areas\CourseAdviser\Controllers\CoursesController.cs" />
     <Compile Include="Areas\CourseAdviser\Controllers\StudentsController.cs" />
     <Compile Include="Areas\CourseAdviser\CourseAdviserAreaRegistration.cs" />
     <Compile Include="Areas\CourseAdviser\ViewModels\Enrollment.cs" />

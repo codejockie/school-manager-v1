@@ -21,13 +21,13 @@ namespace CourseRegistrationSystem.Migrations
         {
             Create.Table("users")
                 .WithColumn("id").AsInt32().Identity().PrimaryKey() // PK Identity(auto-increment)
-                .WithColumn("username").AsString(128)
-                .WithColumn("email").AsCustom("VARCHAR(256)")
+                .WithColumn("username").AsString(50)
+                .WithColumn("email").AsString(50)
                 .WithColumn("password_hash").AsString(128);
 
             Create.Table("roles")
                 .WithColumn("id").AsInt32().Identity().PrimaryKey() // PK Identity(auto-increment)
-                .WithColumn("name").AsString(128);
+                .WithColumn("name").AsString(25);
 
             // creates a table with two FKs from users and roles tables
             Create.Table("role_users")
